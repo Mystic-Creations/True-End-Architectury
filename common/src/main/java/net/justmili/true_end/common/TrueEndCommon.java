@@ -1,6 +1,7 @@
 package net.justmili.true_end.common;
 
 import dev.architectury.event.events.common.TickEvent;
+import net.justmili.true_end.common.commands.DevCommand;
 import net.justmili.true_end.common.init.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

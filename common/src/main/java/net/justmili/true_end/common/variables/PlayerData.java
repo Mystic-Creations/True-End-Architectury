@@ -1,6 +1,7 @@
 package net.justmili.true_end.common.variables;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.saveddata.SavedData;
 
 public class PlayerData extends SavedData {
@@ -13,7 +14,8 @@ public class PlayerData extends SavedData {
         return new LevelData();
     }
 
-    public static PlayerData load(CompoundTag tag) {
+    public PlayerData load() {
+        CompoundTag tag = new CompoundTag();
         PlayerData data = new PlayerData();
         data.beenBeyond = tag.getBoolean("beenBeyond");
         return data;
