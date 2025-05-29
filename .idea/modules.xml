@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/true_end.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/true_end.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/true_end.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/true_end.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/true_end.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common/true_end.common.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/true_end.fabric.main.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/true_end.fabric.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/true_end.fabric.test.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/true_end.fabric.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/true_end.forge.main.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/true_end.forge.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/true_end.forge.test.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/true_end.forge.test.iml" />
+    </modules>
+  </component>
+</project>

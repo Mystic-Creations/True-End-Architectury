@@ -1,0 +1,5 @@
+v1	named	intermediary
+FIELD	net/justmili/true_end/common/mixin/SheepEatTrueEndGrassMixin	Lnet/minecraft/world/entity/Mob;	mob	field_6424
+FIELD	net/justmili/true_end/common/mixin/SheepEatTrueEndGrassMixin	Ljava/util/function/Predicate;	IS_TALL_GRASS	field_6423
+FIELD	net/justmili/true_end/common/mixin/SheepEatTrueEndGrassMixin	Lnet/minecraft/world/level/Level;	level	field_6421
+FIELD	net/justmili/true_end/common/mixin/SheepEatTrueEndGrassMixin	I	eatAnimationTick	field_6422
