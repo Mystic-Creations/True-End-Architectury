@@ -26,7 +26,12 @@ replay_pid*
 
 .DS_Store
 
+
+forge/build
+fabric/buid
 fabric/run
 forge/run
 forge/.gradle
 fabric/.gradle
+common/build
+common/.gradle
