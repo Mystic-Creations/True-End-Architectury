@@ -1,9 +1,7 @@
 package net.justmili.true_end.forge;
 
-import net.justmili.true_end.common.TrueEndCommon;
 import dev.architectury.platform.forge.EventBuses;
-import net.justmili.true_end.common.commands.DevCommand;
-import net.justmili.true_end.common.variables.TrueEndVariables;
+import net.justmili.true_end.TrueEndCommon;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;

@@ -23,7 +23,8 @@
     ]
   },
   "mixins": [
-    "true_end.mixins.json"
+    "true_end.mixins.json",
+    "true_end_fabric.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.14",

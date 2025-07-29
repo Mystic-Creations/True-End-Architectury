@@ -1,7 +1,7 @@
 package net.justmili.true_end.fabric.client;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.justmili.true_end.common.client.TrueEndCommonClient;
+import net.justmili.true_end.client.TrueEndCommonClient;
 
 public final class TrueEndFabricClient implements ClientModInitializer {
     @Override
