@@ -19,11 +19,13 @@ public final class TrueEndCommon {
 
         TrueEndConfig.setup();
 
+        TrueEndSounds.register();
         TrueEndBlocks.register();
         TrueEndItems.register();
         TrueEndCreativeTab.register();
         TrueEndParticleTypes.register();
         TrueEndPoiTypes.register();
+
     }
 
     private static final Queue<Map.Entry<Runnable, Integer>> workQueue = new LinkedList<>();

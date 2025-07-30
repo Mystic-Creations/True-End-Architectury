@@ -53,8 +53,8 @@ public class TrueEndItems {
 
     public static final RegistrySupplier<Item> MYSTERIOUS_CUBE = REGISTRY.register("mysterious_cube", MysteriousCube::new);
     public static final RegistrySupplier<Item> DREAMERS_COMPASS = REGISTRY.register("dreamers_compass", DreamersCompass::new);
-    public static final RegistrySupplier<Item> MUSIC_DISK_FARLANDS = REGISTRY.register("farlands", MusicDiskFarlands::new);
-    public static final RegistrySupplier<Item> MUSIC_DISK_NEVER_ALONE = REGISTRY.register("never_alone", MusicDiskNeverAlone::new);
+    public static final RegistrySupplier<Item> MUSIC_DISK_FARLANDS = REGISTRY.register("music_disc_farlands", MusicDiskFarlands::new);
+    public static final RegistrySupplier<Item> MUSIC_DISK_NEVER_ALONE = REGISTRY.register("music_disc_never_alone", MusicDiskNeverAlone::new);
 
     private static RegistrySupplier<Item> block(RegistrySupplier<Block> block) {
         return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));

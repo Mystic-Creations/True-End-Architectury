@@ -24,6 +24,5 @@ public class TrueEndCreativeTab {
     public static void register() {
         // Register the tab itself first
         REGISTRY.register();
-
     }
 }

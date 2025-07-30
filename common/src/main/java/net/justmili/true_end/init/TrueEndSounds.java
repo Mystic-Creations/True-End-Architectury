@@ -17,4 +17,8 @@ public class TrueEndSounds {
     public static final RegistrySupplier<SoundEvent> MOD_CREDITS_MUSIC = sound("back_in_the_game");
     public static final RegistrySupplier<SoundEvent> MUSIC_FARLANDS = sound("farlands");
     public static final RegistrySupplier<SoundEvent> MUSIC_NEVER_ALONE = sound("never_alone");
+
+    public static void register() {
+        REGISTRY.register();
+    }
 }
