@@ -13,20 +13,17 @@ public class WorldData extends SavedData {
     private double btdSpawnY = 0.0;
     private double btdSpawnZ = 0.0;
     private boolean unknownInWorld = false;
-    private int btdConversationDelay = 0;
-    private double randomEventChance = 0.0;
-    private boolean randomEventsToggle = false;
-    private boolean flashingLights = false;
-    private boolean daytimeChangeToggle = false;
-    private boolean clearDreamItems = false;
+    private boolean hasShownCredits = false;
 
     public boolean isUnknownInWorld() { return unknownInWorld; }
     public double getBtdSpawnX() { return btdSpawnX; }
     public double getBtdSpawnY() { return btdSpawnY; }
     public double getBtdSpawnZ() { return btdSpawnZ; }
+    public boolean hasShownCredits() { return hasShownCredits;}
 
     public void setUnknownInWorld(boolean v) { unknownInWorld = v ;setDirty(); }
     public void setBtdSpawn(double x, double y, double z) { btdSpawnX = x; btdSpawnY = y; btdSpawnZ = z; setDirty(); }
+    public void setShownCredits(boolean v) { hasShownCredits = v; }
 
     public static WorldData load(CompoundTag nbt) {
         WorldData m = new WorldData();
@@ -34,12 +31,6 @@ public class WorldData extends SavedData {
         m.btdSpawnY = nbt.getDouble("btdSpawnY");
         m.btdSpawnZ = nbt.getDouble("btdSpawnZ");
         m.unknownInWorld = nbt.getBoolean("unknownInWorld");
-        m.btdConversationDelay = nbt.getInt("btdConversationDelay");
-        m.randomEventChance = nbt.getDouble("randomEventChance");
-        m.randomEventsToggle = nbt.getBoolean("randomEventsToggle");
-        m.flashingLights = nbt.getBoolean("flashingLights");
-        m.daytimeChangeToggle = nbt.getBoolean("daytimeChangeToggle");
-        m.clearDreamItems = nbt.getBoolean("clearDreamItems");
         return m;
     }
 
@@ -49,12 +40,6 @@ public class WorldData extends SavedData {
         nbt.putDouble("btdSpawnY", btdSpawnY);
         nbt.putDouble("btdSpawnZ", btdSpawnZ);
         nbt.putBoolean("unknownInWorld", unknownInWorld);
-        nbt.putInt("btdConversationDelay", btdConversationDelay);
-        nbt.putDouble("randomEventChance", randomEventChance);
-        nbt.putBoolean("randomEventsToggle", randomEventsToggle);
-        nbt.putBoolean("flashingLights", flashingLights);
-        nbt.putBoolean("daytimeChangeToggle", daytimeChangeToggle);
-        nbt.putBoolean("clearDreamItems", clearDreamItems);
         return nbt;
     }
 
