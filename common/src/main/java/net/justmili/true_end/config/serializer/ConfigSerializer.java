@@ -1,9 +1,8 @@
-package net.justmili.true_end.config.forge.serializer;
-
-import net.minecraftforge.fml.loading.FMLPaths;
+package net.justmili.true_end.config.serializer;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Map;
 
 public abstract class ConfigSerializer {
@@ -13,7 +12,14 @@ public abstract class ConfigSerializer {
 	public ConfigSerializer(String configFileName, String extension) {
 		this.extension = extension;
 		extension = "." + extension;
-		this.configFile = FMLPaths.CONFIGDIR.get().resolve(configFileName.endsWith(extension) ? configFileName : configFileName + extension).toFile();
+		this.configFile = getConfigFile(configFileName, extension);
+	}
+
+	private File getConfigFile(String configFileName, String extension) {
+		if (!configFileName.endsWith(extension)) {
+			configFileName += extension;
+		}
+		return Paths.get("config", configFileName).toFile();
 	}
 
 	protected File getConfigFile() {

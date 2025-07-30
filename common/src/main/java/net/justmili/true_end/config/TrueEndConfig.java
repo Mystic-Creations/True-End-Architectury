@@ -1,18 +1,14 @@
-package net.justmili.true_end.config.forge;
+package net.justmili.true_end.config;
 
 import net.justmili.true_end.TrueEndCommon;
-import net.justmili.true_end.config.forge.serializer.GsonSerializer;
+import net.justmili.true_end.config.serializer.GsonSerializer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.slf4j.event.Level;
 
 import java.util.Map;
 import java.util.HashMap;
 
-@Mod.EventBusSubscriber(modid = "true_end", bus = Mod.EventBusSubscriber.Bus.MOD)
 public class TrueEndConfig {
 
     public static final GsonSerializer serializer = new GsonSerializer("TrueEnd_COMMON");
@@ -29,8 +25,7 @@ public class TrueEndConfig {
     public static boolean daytimeChangeToggle = true;
     public static boolean clearDreamItems = true;
 
-    @SubscribeEvent
-    public static void clientSetup(FMLCommonSetupEvent event) {
+    public static void setup() {
         Map<String, Object> entries = TrueEndConfig.serializer.deserialize();
         entries = entries == null ? new HashMap<>() : entries;
 

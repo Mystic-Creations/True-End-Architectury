@@ -108,6 +108,6 @@
       "true_end:gravel_patch"
     ],
     [],
-    []
+    ["true_end:flower", "true_end:rose"]
   ]
 }

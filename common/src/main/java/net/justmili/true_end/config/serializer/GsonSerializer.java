@@ -1,4 +1,4 @@
-package net.justmili.true_end.config.forge.serializer;
+package net.justmili.true_end.config.serializer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,6 +1,7 @@
 package net.justmili.true_end;
 
 import dev.architectury.event.events.common.TickEvent;
+import net.justmili.true_end.config.TrueEndConfig;
 import net.justmili.true_end.init.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,8 @@ public final class TrueEndCommon {
         // Write common init code here.
 
         TickEvent.SERVER_POST.register(server -> processQueue());
+
+        TrueEndConfig.setup();
 
         TrueEndBlocks.register();
         TrueEndItems.register();

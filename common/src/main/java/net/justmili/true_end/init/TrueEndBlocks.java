@@ -4,6 +4,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.justmili.true_end.TrueEndCommon;
 import net.justmili.true_end.block.*;
+import net.justmili.true_end.block.Void;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.core.registries.Registries;
 
@@ -41,6 +42,10 @@ public class TrueEndBlocks {
     public static final RegistrySupplier<Block> BEYOND_THE_DREAM_PORTAL = REGISTRY.register("beyond_the_dream_portal", BeyondTheDreamPortal::new);
     public static final RegistrySupplier<Block> GLASS = REGISTRY.register("glass", Glass::new);
     public static final RegistrySupplier<Block> SAND = REGISTRY.register("sand", Sand::new);
+    public static final RegistrySupplier<Block> FLOWER = REGISTRY.register("flower", Flower::new);
+    public static final RegistrySupplier<Block> ROSE = REGISTRY.register("rose", Rose::new);
+    public static final RegistrySupplier<Block> SAPLING = REGISTRY.register("sapling", Sapling::new);
+    public static final RegistrySupplier<Block> VOID = REGISTRY.register("void", Void::new);
 
     public static void register() {
         TrueEndCommon.LOGGER.info("[TRUE_END] Registering TrueEnd Blocks");

@@ -19,7 +19,7 @@
       "net.justmili.true_end.fabric.TrueEndFabric"
     ],
     "client": [
-      "net.justmili.true_end.fabric.client.TrueEndFabricClient"
+      "net.justmili.true_end.client.fabric.TrueEndFabricClient"
     ]
   },
   "mixins": [

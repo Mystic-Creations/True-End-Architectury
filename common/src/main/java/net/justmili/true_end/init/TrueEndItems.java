@@ -1,5 +1,9 @@
 package net.justmili.true_end.init;
 
+import net.justmili.true_end.block.Flower;
+import net.justmili.true_end.item.DreamersCompass;
+import net.justmili.true_end.item.MusicDiskFarlands;
+import net.justmili.true_end.item.MusicDiskNeverAlone;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DoubleHighBlockItem;
@@ -42,8 +46,15 @@ public class TrueEndItems {
     public static final RegistrySupplier<Item> GRAVEL = block(TrueEndBlocks.GRAVEL);
     public static final RegistrySupplier<Item> GLASS = block(TrueEndBlocks.GLASS);
     public static final RegistrySupplier<Item> SAND = block(TrueEndBlocks.SAND);
+    public static final RegistrySupplier<Item> VOID =  block(TrueEndBlocks.VOID);
+    public static final RegistrySupplier<Item> SAPLING =  block(TrueEndBlocks.SAPLING);
+    public static final RegistrySupplier<Item> FLOWER = block(TrueEndBlocks.FLOWER);
+    public static final RegistrySupplier<Item> ROSE = block(TrueEndBlocks.ROSE);
 
     public static final RegistrySupplier<Item> MYSTERIOUS_CUBE = REGISTRY.register("mysterious_cube", MysteriousCube::new);
+    public static final RegistrySupplier<Item> DREAMERS_COMPASS = REGISTRY.register("dreamers_compass", DreamersCompass::new);
+    public static final RegistrySupplier<Item> MUSIC_DISK_FARLANDS = REGISTRY.register("farlands", MusicDiskFarlands::new);
+    public static final RegistrySupplier<Item> MUSIC_DISK_NEVER_ALONE = REGISTRY.register("never_alone", MusicDiskNeverAlone::new);
 
     private static RegistrySupplier<Item> block(RegistrySupplier<Block> block) {
         return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
