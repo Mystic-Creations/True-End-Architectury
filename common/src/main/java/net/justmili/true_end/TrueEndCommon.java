@@ -3,6 +3,9 @@ package net.justmili.true_end;
 import dev.architectury.event.events.common.TickEvent;
 import net.justmili.true_end.config.TrueEndConfig;
 import net.justmili.true_end.init.*;
+import net.justmili.true_end.procedures.randomevents.MobStare;
+import net.justmili.true_end.procedures.randomevents.SoundPlayer;
+import net.justmili.true_end.procedures.randomevents.TimeChange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +28,15 @@ public final class TrueEndCommon {
         TrueEndCreativeTab.register();
         TrueEndParticleTypes.register();
         TrueEndPoiTypes.register();
+
+        registerEvents();
+
+    }
+
+    public static void registerEvents() {
+
+        TickEvent.SERVER_POST.register(MobStare::onWorldTick);
+        TickEvent.PLAYER_POST.register(TimeChange::onPlayerTick);
 
     }
 
