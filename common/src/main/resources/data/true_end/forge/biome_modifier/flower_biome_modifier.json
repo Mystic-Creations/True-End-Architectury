@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "true_end:plains",
+    "true_end:forest"
+  ],
+  "features": "true_end:flower",
+  "step": "vegetal_decoration"
+}
