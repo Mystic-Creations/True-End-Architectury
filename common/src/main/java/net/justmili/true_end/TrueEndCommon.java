@@ -1,11 +1,15 @@
 package net.justmili.true_end;
 
-import dev.architectury.event.events.common.ChatEvent;
-import dev.architectury.event.events.common.EntityEvent;
-import dev.architectury.event.events.common.PlayerEvent;
-import dev.architectury.event.events.common.TickEvent;
+import dev.architectury.event.events.common.*;
 import net.justmili.true_end.config.TrueEndConfig;
 import net.justmili.true_end.init.*;
+import net.justmili.true_end.procedures.advancements.NotAlone;
+import net.justmili.true_end.procedures.advancements.OnARailTracker;
+import net.justmili.true_end.procedures.advancements.WhenPigsFly;
+import net.justmili.true_end.procedures.alphafeatures.AlphaFoodSystem;
+import net.justmili.true_end.procedures.alphafeatures.NoCooldown;
+import net.justmili.true_end.procedures.alphafeatures.NoSprint;
+import net.justmili.true_end.procedures.alphafeatures.WoolDrop;
 import net.justmili.true_end.procedures.events.ChatReplies;
 import net.justmili.true_end.procedures.events.FoodLvlReset;
 import net.justmili.true_end.procedures.events.NoBtdEscape;
@@ -14,6 +18,7 @@ import net.justmili.true_end.procedures.randomevents.MobStare;
 import net.justmili.true_end.procedures.randomevents.SoundPlayer;
 import net.justmili.true_end.procedures.randomevents.TimeChange;
 import net.justmili.true_end.procedures.randomevents.UnknownSpawning;
+import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,14 +53,24 @@ public final class TrueEndCommon {
         TickEvent.SERVER_LEVEL_POST.register(UnknownSpawning::onWorldTick);
         TickEvent.PLAYER_POST.register(TimeChange::onPlayerTick);
         TickEvent.PLAYER_POST.register(SoundPlayer::onPlayerTick);
+        TickEvent.PLAYER_POST.register(NoSprint::onPlayerTick);
+        TickEvent.PLAYER_POST.register(NotAlone::onPlayerTick);
+        TickEvent.PLAYER_POST.register(OnARailTracker::onPlayerTick);
 
         ChatEvent.RECEIVED.register(ChatReplies::onChat);
 
         PlayerEvent.CHANGE_DIMENSION.register(FoodLvlReset::onChangeDimension);
+        PlayerEvent.CHANGE_DIMENSION.register(NoCooldown::onPlayerChangedDimension);
         PlayerEvent.PLAYER_RESPAWN.register(NoBtdEscape::onPlayerRespawn);
+        PlayerEvent.PLAYER_RESPAWN.register(NoCooldown::onPlayerRespawn);
 
         EntityEvent.LIVING_DEATH.register(NoBtdEscape::onPlayerDeath);
+        EntityEvent.LIVING_DEATH.register(WhenPigsFly::onPigFallDeath);
         EntityEvent.LIVING_HURT.register(NoVoidDamage::onEntityAttacked);
+        EntityEvent.LIVING_HURT.register(WoolDrop::onEntityAttacked);
+
+        InteractionEvent.RIGHT_CLICK_ITEM.register(AlphaFoodSystem::onRightClickItem);
+        InteractionEvent.RIGHT_CLICK_BLOCK.register(AlphaFoodSystem::onRightClickBlock);
     }
 
     private static final Queue<Map.Entry<Runnable, Integer>> workQueue = new LinkedList<>();
