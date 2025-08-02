@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.*;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -29,12 +30,8 @@ public class TrueEndVariablesImpl {
         return playerData.get();
     }
 
-    public static WorldData getLevelData(ServerLevel level) {
-        AtomicReference<WorldData> levelData = new AtomicReference<>();
-        level.getCapability(MAP_VARIABLES_CAP).ifPresent(
-                levelData::set
-        );
-        return levelData.get();
+    public static WorldData getLevelData(Level level) {
+        return WorldData.get(level);
     }
 
     public static final Capability<PlayerData> PLAYER_VARS_CAP =

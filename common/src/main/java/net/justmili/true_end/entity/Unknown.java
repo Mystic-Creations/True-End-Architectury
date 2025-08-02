@@ -39,7 +39,9 @@ public class Unknown extends AmbientCreature {
         super(type, level);
         setPersistenceRequired();
         this.navigation = new GroundPathNavigation(this, level);
+        this.setLevel(level);
     }
+
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 20)

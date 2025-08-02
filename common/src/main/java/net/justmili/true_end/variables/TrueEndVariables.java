@@ -3,6 +3,7 @@ package net.justmili.true_end.variables;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
 
 public class TrueEndVariables {
 
@@ -12,7 +13,7 @@ public class TrueEndVariables {
     }
 
     @ExpectPlatform
-    public static WorldData getLevelData(ServerLevel level) {
+    public static WorldData getLevelData(Level level) {
         throw new AssertionError("Should never be called");
     }
 }

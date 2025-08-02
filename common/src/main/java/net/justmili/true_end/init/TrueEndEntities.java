@@ -1,5 +1,6 @@
 package net.justmili.true_end.init;
 
+import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.DeferredSupplier;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -19,5 +20,7 @@ public class TrueEndEntities {
 
     public static void register() {
         REGISTRY.register();
+
+        EntityAttributeRegistry.register(UNKNOWN, Unknown::createAttributes);
     }
 }

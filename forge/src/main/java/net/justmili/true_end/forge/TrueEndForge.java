@@ -3,6 +3,8 @@ package net.justmili.true_end.forge;
 import dev.architectury.platform.forge.EventBuses;
 import net.justmili.true_end.TrueEndCommon;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.eventbus.EventBus;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
@@ -16,9 +18,13 @@ public final class TrueEndForge {
             ResourceLocation.parse(TrueEndCommon.MOD_ID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals);
 
+    public static IEventBus EVENT_BUS;
+
     public TrueEndForge() {
+
+        EVENT_BUS = FMLJavaModLoadingContext.get().getModEventBus();
         // Submit our event bus to let Architectury API register our content on the right time.
-        EventBuses.registerModEventBus(TrueEndCommon.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
+        EventBuses.registerModEventBus(TrueEndCommon.MOD_ID, EVENT_BUS);
         // Run our common setup.
         TrueEndCommon.init();
     }

@@ -5,6 +5,7 @@ import net.justmili.true_end.variables.WorldData;
 import net.justmili.true_end.variables.PlayerData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
 
 public class TrueEndVariablesImpl {
 
@@ -14,7 +15,7 @@ public class TrueEndVariablesImpl {
         return ((ServerPlayerExt) player).true_end$getPlayerData();
     }
 
-    public static WorldData getLevelData(ServerLevel level) {
+    public static WorldData getLevelData(Level level) {
         return WorldData.get(level);
     }
 }
