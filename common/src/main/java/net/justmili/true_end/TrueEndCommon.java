@@ -13,6 +13,7 @@ import net.justmili.true_end.procedures.events.NoVoidDamage;
 import net.justmili.true_end.procedures.randomevents.MobStare;
 import net.justmili.true_end.procedures.randomevents.SoundPlayer;
 import net.justmili.true_end.procedures.randomevents.TimeChange;
+import net.justmili.true_end.procedures.randomevents.UnknownSpawning;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +44,8 @@ public final class TrueEndCommon {
 
     public static void registerEvents() {
 
-        TickEvent.SERVER_POST.register(MobStare::onWorldTick);
+        TickEvent.SERVER_LEVEL_POST.register(MobStare::onWorldTick);
+        TickEvent.SERVER_LEVEL_POST.register(UnknownSpawning::onWorldTick);
         TickEvent.PLAYER_POST.register(TimeChange::onPlayerTick);
         TickEvent.PLAYER_POST.register(SoundPlayer::onPlayerTick);
 

@@ -17,9 +17,7 @@ public class MobStare {
     private static long lastEventTick = 0;
     private static final long EVENT_COOLDOWN = 4L * 24000L;
 
-    public static void onWorldTick(MinecraftServer server) {
-
-        for (ServerLevel level : server.getAllLevels()) {
+    public static void onWorldTick(ServerLevel level) {
 
             long worldTick = level.getGameTime();
             if (worldTick < lastEventTick + EVENT_COOLDOWN) {
@@ -49,7 +47,6 @@ public class MobStare {
             }
             updateStare(level);
         }
-    }
 
     private static void updateStare(ServerLevel server) {
         Iterator<Map.Entry<Mob, Integer>> iter = stareMap.entrySet().iterator();
