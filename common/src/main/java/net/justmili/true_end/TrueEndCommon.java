@@ -1,8 +1,15 @@
 package net.justmili.true_end;
 
+import dev.architectury.event.events.common.ChatEvent;
+import dev.architectury.event.events.common.EntityEvent;
+import dev.architectury.event.events.common.PlayerEvent;
 import dev.architectury.event.events.common.TickEvent;
 import net.justmili.true_end.config.TrueEndConfig;
 import net.justmili.true_end.init.*;
+import net.justmili.true_end.procedures.events.ChatReplies;
+import net.justmili.true_end.procedures.events.FoodLvlReset;
+import net.justmili.true_end.procedures.events.NoBtdEscape;
+import net.justmili.true_end.procedures.events.NoVoidDamage;
 import net.justmili.true_end.procedures.randomevents.MobStare;
 import net.justmili.true_end.procedures.randomevents.SoundPlayer;
 import net.justmili.true_end.procedures.randomevents.TimeChange;
@@ -28,6 +35,7 @@ public final class TrueEndCommon {
         TrueEndCreativeTab.register();
         TrueEndParticleTypes.register();
         TrueEndPoiTypes.register();
+        TrueEndEntities.register();
 
         registerEvents();
 
@@ -37,7 +45,15 @@ public final class TrueEndCommon {
 
         TickEvent.SERVER_POST.register(MobStare::onWorldTick);
         TickEvent.PLAYER_POST.register(TimeChange::onPlayerTick);
+        TickEvent.PLAYER_POST.register(SoundPlayer::onPlayerTick);
 
+        ChatEvent.RECEIVED.register(ChatReplies::onChat);
+
+        PlayerEvent.CHANGE_DIMENSION.register(FoodLvlReset::onChangeDimension);
+        PlayerEvent.PLAYER_RESPAWN.register(NoBtdEscape::onPlayerRespawn);
+
+        EntityEvent.LIVING_DEATH.register(NoBtdEscape::onPlayerDeath);
+        EntityEvent.LIVING_HURT.register(NoVoidDamage::onEntityAttacked);
     }
 
     private static final Queue<Map.Entry<Runnable, Integer>> workQueue = new LinkedList<>();
