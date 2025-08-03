@@ -22,9 +22,5 @@ public final class TrueEndFabric implements ModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             DevCommand.register(dispatcher);
         });
-        FireBlock fire = (FireBlock) Blocks.FIRE;
-
-        fire.setFlammable(ModBlocks.MY_BLOCK.get(), 60, 100);
-    });
     }
 }

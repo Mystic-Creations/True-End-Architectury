@@ -42,6 +42,7 @@ public final class TrueEndCommon {
         TrueEndParticleTypes.register();
         TrueEndPoiTypes.register();
         TrueEndEntities.register();
+        TrueEndFireBlocksRegistry.register();
 
         registerEvents();
 

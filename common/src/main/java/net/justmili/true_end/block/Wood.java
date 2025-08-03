@@ -51,6 +51,4 @@ public class Wood extends Block {
 		}
 		return state;
 	}
-
-	FireBlock
 }
