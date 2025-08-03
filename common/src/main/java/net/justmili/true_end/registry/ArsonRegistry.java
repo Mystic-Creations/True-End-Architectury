@@ -67,6 +67,34 @@ public class ArsonRegistry {
         return ArsonRegistryRegistrationResult.ARSON_REGISTRY_REGISTRATION_RESULT_FAILURE;
     }
 
+    public Arsonabilty getRegisteredBlockItem(Block block) {
+        try {
+            // Access the private 'items' field
+            java.lang.reflect.Field itemsField = ArsonRegistry.class.getDeclaredField("items");
+            itemsField.setAccessible(true);
+            Object itemsMap = itemsField.get(this);
+
+            // Get the 'get' method from the HashMap class
+            Method getMethod = HashMap.class.getDeclaredMethod("get", Object.class);
+            getMethod.setAccessible(true);
+
+            // Invoke the 'get' method reflectively
+            return (Arsonabilty) getMethod.invoke(itemsMap, block);
+        } catch (NoSuchFieldException e) {
+            TrueEndCommon.LOGGER.error("Could not find 'items' field in ArsonRegistry", e);
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            TrueEndCommon.LOGGER.error("No access to 'items' field or get() method", e);
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            TrueEndCommon.LOGGER.error("HashMap.get() method not found", e);
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            TrueEndCommon.LOGGER.error("Error invoking get() on HashMap", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public static class Arsonabilty {
 
         public int encouragement;
