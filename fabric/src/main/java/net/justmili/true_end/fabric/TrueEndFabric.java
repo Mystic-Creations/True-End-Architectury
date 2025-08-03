@@ -1,9 +1,12 @@
 package net.justmili.true_end.fabric;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.justmili.true_end.TrueEndCommon;
 import net.fabricmc.api.ModInitializer;
 import net.justmili.true_end.commands.DevCommand;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FireBlock;
 
 public final class TrueEndFabric implements ModInitializer {
 
@@ -19,6 +22,9 @@ public final class TrueEndFabric implements ModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             DevCommand.register(dispatcher);
         });
+        FireBlock fire = (FireBlock) Blocks.FIRE;
 
+        fire.setFlammable(ModBlocks.MY_BLOCK.get(), 60, 100);
+    });
     }
 }

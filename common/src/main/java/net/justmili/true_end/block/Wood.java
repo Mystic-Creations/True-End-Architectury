@@ -1,6 +1,7 @@
 
 package net.justmili.true_end.block;
 
+import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -50,4 +51,6 @@ public class Wood extends Block {
 		}
 		return state;
 	}
+
+	FireBlock
 }
