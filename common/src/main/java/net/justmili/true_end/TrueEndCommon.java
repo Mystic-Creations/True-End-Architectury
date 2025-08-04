@@ -18,7 +18,6 @@ import net.justmili.true_end.procedures.randomevents.MobStare;
 import net.justmili.true_end.procedures.randomevents.SoundPlayer;
 import net.justmili.true_end.procedures.randomevents.TimeChange;
 import net.justmili.true_end.procedures.randomevents.UnknownSpawning;
-import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +41,7 @@ public final class TrueEndCommon {
         TrueEndParticleTypes.register();
         TrueEndPoiTypes.register();
         TrueEndEntities.register();
-        TrueEndFireBlocksRegistry.register();
+        TrueEndFireBlocks.register();
 
         registerEvents();
 
