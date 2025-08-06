@@ -6,6 +6,7 @@ import dev.architectury.event.events.common.*;
 import net.justmili.true_end.config.TrueEndConfig;
 import net.justmili.true_end.init.*;
 import net.justmili.true_end.procedures.DimSwapToBTD;
+import net.justmili.true_end.procedures.DimSwapToNWAD;
 import net.justmili.true_end.procedures.PlayerInvManager;
 import net.justmili.true_end.procedures.advancements.NotAlone;
 import net.justmili.true_end.procedures.advancements.OnARailTracker;
@@ -70,12 +71,15 @@ public final class TrueEndCommon {
         PlayerEvent.CHANGE_DIMENSION.register(PlayerInvManager::onDimensionChange);
         PlayerEvent.PLAYER_RESPAWN.register(NoBtdEscape::onPlayerRespawn);
         PlayerEvent.PLAYER_RESPAWN.register(NoCooldown::onPlayerRespawn);
+        PlayerEvent.PLAYER_RESPAWN.register(DimSwapToNWAD::onPlayerRespawn);
         PlayerEvent.PLAYER_ADVANCEMENT.register(DimSwapToBTD::onAdvancement);
 
         EntityEvent.LIVING_DEATH.register(NoBtdEscape::onPlayerDeath);
         EntityEvent.LIVING_DEATH.register(WhenPigsFly::onPigFallDeath);
+        EntityEvent.LIVING_DEATH.register(DimSwapToNWAD.onPlayerDeath);
         EntityEvent.LIVING_HURT.register(NoVoidDamage::onEntityAttacked);
         EntityEvent.LIVING_HURT.register(WoolDrop::onEntityAttacked);
+        EntityEvent.LIVING_HURT.register(DimSwapToNWAD::onEntityAttacked);
 
         InteractionEvent.RIGHT_CLICK_ITEM.register(AlphaFoodSystem::onRightClickItem);
         InteractionEvent.RIGHT_CLICK_BLOCK.register(AlphaFoodSystem::onRightClickBlock);
