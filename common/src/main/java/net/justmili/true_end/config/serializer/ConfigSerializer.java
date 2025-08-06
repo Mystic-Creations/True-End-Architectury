@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 public abstract class ConfigSerializer {
-	private final File configFile;
+	public final File configFile;
 	private final String extension;
 
 	public ConfigSerializer(String configFileName, String extension) {

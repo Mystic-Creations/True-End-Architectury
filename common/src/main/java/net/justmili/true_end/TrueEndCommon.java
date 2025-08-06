@@ -1,8 +1,12 @@
 package net.justmili.true_end;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import dev.architectury.event.events.common.*;
 import net.justmili.true_end.config.TrueEndConfig;
 import net.justmili.true_end.init.*;
+import net.justmili.true_end.procedures.DimSwapToBTD;
+import net.justmili.true_end.procedures.PlayerInvManager;
 import net.justmili.true_end.procedures.advancements.NotAlone;
 import net.justmili.true_end.procedures.advancements.OnARailTracker;
 import net.justmili.true_end.procedures.advancements.WhenPigsFly;
@@ -18,6 +22,8 @@ import net.justmili.true_end.procedures.randomevents.MobStare;
 import net.justmili.true_end.procedures.randomevents.SoundPlayer;
 import net.justmili.true_end.procedures.randomevents.TimeChange;
 import net.justmili.true_end.procedures.randomevents.UnknownSpawning;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,8 +67,10 @@ public final class TrueEndCommon {
 
         PlayerEvent.CHANGE_DIMENSION.register(FoodLvlReset::onChangeDimension);
         PlayerEvent.CHANGE_DIMENSION.register(NoCooldown::onPlayerChangedDimension);
+        PlayerEvent.CHANGE_DIMENSION.register(PlayerInvManager::onDimensionChange);
         PlayerEvent.PLAYER_RESPAWN.register(NoBtdEscape::onPlayerRespawn);
         PlayerEvent.PLAYER_RESPAWN.register(NoCooldown::onPlayerRespawn);
+        PlayerEvent.PLAYER_ADVANCEMENT.register(DimSwapToBTD::onAdvancement);
 
         EntityEvent.LIVING_DEATH.register(NoBtdEscape::onPlayerDeath);
         EntityEvent.LIVING_DEATH.register(WhenPigsFly::onPigFallDeath);
@@ -90,6 +98,19 @@ public final class TrueEndCommon {
             } else {
                 entry.setValue(newTick);
             }
+        }
+    }
+
+    public static void messageWithCooldown(ServerPlayer player, String[] jsonLines, int cooldown) {
+        for (int i = 0; i < jsonLines.length; i++) {
+            String rawJson = jsonLines[i];
+            queueServerWork(1 + cooldown * i, () -> {
+                JsonElement jsonElement = JsonParser.parseString(rawJson);
+                Component component   = Component.Serializer.fromJson(jsonElement);
+                if (component != null) {
+                    player.sendSystemMessage(component);
+                }
+            });
         }
     }
 
