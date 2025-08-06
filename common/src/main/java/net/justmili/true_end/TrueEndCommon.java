@@ -29,6 +29,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public final class TrueEndCommon {
     public static final Logger LOGGER = LoggerFactory.getLogger(TrueEndCommon.class);
@@ -76,7 +78,7 @@ public final class TrueEndCommon {
 
         EntityEvent.LIVING_DEATH.register(NoBtdEscape::onPlayerDeath);
         EntityEvent.LIVING_DEATH.register(WhenPigsFly::onPigFallDeath);
-        EntityEvent.LIVING_DEATH.register(DimSwapToNWAD.onPlayerDeath);
+        EntityEvent.LIVING_DEATH.register(DimSwapToNWAD::onPlayerDeath);
         EntityEvent.LIVING_HURT.register(NoVoidDamage::onEntityAttacked);
         EntityEvent.LIVING_HURT.register(WoolDrop::onEntityAttacked);
         EntityEvent.LIVING_HURT.register(DimSwapToNWAD::onEntityAttacked);
@@ -85,32 +87,38 @@ public final class TrueEndCommon {
         InteractionEvent.RIGHT_CLICK_BLOCK.register(AlphaFoodSystem::onRightClickBlock);
     }
 
-    private static final Queue<Map.Entry<Runnable, Integer>> workQueue = new LinkedList<>();
+    private static final ConcurrentLinkedQueue<WorkItem> workQueue = new ConcurrentLinkedQueue<>();
 
-    public static void queueServerWork(int tickDelay, Runnable action) {
-        workQueue.add(new AbstractMap.SimpleEntry<>(action, tickDelay));
+    private static class WorkItem {
+        final Runnable task;
+        final AtomicInteger ticksRemaining;
+
+        WorkItem(Runnable task, int delay) {
+            this.task = task;
+            this.ticksRemaining = new AtomicInteger(delay);
+        }
     }
 
-    private static void processQueue() {
-        Iterator<Map.Entry<Runnable, Integer>> iterator = workQueue.iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Runnable, Integer> entry = iterator.next();
-            int newTick = entry.getValue() - 1;
-            if (newTick <= 0) {
-                entry.getKey().run();
-                iterator.remove();
-            } else {
-                entry.setValue(newTick);
+    public static void queueServerWork(int tickDelay, Runnable action) {
+        workQueue.add(new WorkItem(action, tickDelay));
+    }
+
+    public static void processQueue() {
+        for (Iterator<WorkItem> iterator = workQueue.iterator(); iterator.hasNext();) {
+            WorkItem item = iterator.next();
+            if (item.ticksRemaining.decrementAndGet() <= 0) {
+                item.task.run();
+                iterator.remove(); // safe to remove in ConcurrentLinkedQueue
             }
         }
     }
 
     public static void messageWithCooldown(ServerPlayer player, String[] jsonLines, int cooldown) {
         for (int i = 0; i < jsonLines.length; i++) {
-            String rawJson = jsonLines[i];
+            final String rawJson = jsonLines[i];
             queueServerWork(1 + cooldown * i, () -> {
                 JsonElement jsonElement = JsonParser.parseString(rawJson);
-                Component component   = Component.Serializer.fromJson(jsonElement);
+                Component component = Component.Serializer.fromJson(jsonElement);
                 if (component != null) {
                     player.sendSystemMessage(component);
                 }

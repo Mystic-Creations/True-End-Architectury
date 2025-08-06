@@ -52,10 +52,11 @@ public class DimSwapToNWAD {
         return EventResult.pass();
     }
 
-    public static void onPlayerDeath(LivingEntity entity, DamageSource source) {
-        if (!(entity instanceof ServerPlayer player)) return;
+    public static EventResult onPlayerDeath(LivingEntity entity, DamageSource source) {
+        if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
         ResourceKey<Level> dim = player.level().dimension();
         if (dim == NWAD) diedIn.put(player.getUUID(), dim);
+        return EventResult.pass();
     }
     public static void onPlayerRespawn(ServerPlayer player,  boolean bl) {
 

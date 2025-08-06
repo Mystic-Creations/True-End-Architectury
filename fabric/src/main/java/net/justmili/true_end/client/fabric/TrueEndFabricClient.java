@@ -12,6 +12,8 @@ public class TrueEndFabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.SAPLING.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.GLASS.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.SAPLING.get(), RenderType.cutout());
         EntityRendererRegistry.register(TrueEndEntities.UNKNOWN.get(), UnknownEntityRenderer.UnknownRenderer::new);
     }
 }
