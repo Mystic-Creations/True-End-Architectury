@@ -6,6 +6,7 @@ import net.justmili.true_end.variables.TrueEndVariables;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerAbilitiesPacket;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
@@ -32,10 +33,10 @@ public class DimSwapToNWAD {
 
     public static EventResult onEntityAttacked(LivingEntity entity, DamageSource source, float amount) {
         Level world = entity.level();
-
         if (entity.level().dimension() == BTD || entity.level().dimension() == NWAD) return EventResult.pass();
         if (source == null) return EventResult.pass();
         if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
+        player.sendSystemMessage(Component.literal("skbidi"));
         if (!source.is(DamageTypes.IN_WALL) || !source.is(DamageTypes.FELL_OUT_OF_WORLD)) return EventResult.pass();
         if (Math.random() < TrueEndConfig.randomEventChance * 2) return EventResult.pass();
 

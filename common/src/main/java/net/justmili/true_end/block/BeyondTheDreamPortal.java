@@ -2,7 +2,11 @@ package net.justmili.true_end.block;
 
 import net.justmili.true_end.init.TrueEndParticleTypes;
 import net.justmili.true_end.world.teleporter.BeyondTheDreamPortalShape;
+import net.justmili.true_end.world.teleporter.BeyondTheDreamTeleporter;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 
 
@@ -22,7 +26,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.portal.PortalInfo;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static net.justmili.true_end.init.TrueEndDimKeys.BTD;
@@ -79,7 +85,7 @@ public class BeyondTheDreamPortal extends NetherPortalBlock {
 
     @Override
     public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-        if (entity.canChangeDimensions() && !entity.level().isClientSide() && true) {
+        if (entity.canChangeDimensions() && !entity.level().isClientSide()) {
             if (entity.isOnPortalCooldown()) {
                 entity.setPortalCooldown();
             } else if (entity.level().dimension() != BTD) {
@@ -92,7 +98,36 @@ public class BeyondTheDreamPortal extends NetherPortalBlock {
         }
     }
 
-    private void teleportToDimension(Entity entity, BlockPos pos, ResourceKey<Level> destinationType) {
-        entity.changeDimension(entity.getServer().getLevel(destinationType));
+    public static void teleportToDimension(Entity entity, BlockPos enterPos,  ResourceKey<Level> destinationKey) {
+        MinecraftServer server = entity.getServer();
+        if (server == null) return;
+
+        ServerLevel destWorld = server.getLevel(destinationKey);
+        if (destWorld == null) return;
+
+        BeyondTheDreamTeleporter teleporter = new BeyondTheDreamTeleporter(destWorld, enterPos);
+        PortalInfo portalInfo = teleporter.getPortalInfo(entity, destWorld);
+        teleporter.createPortal(
+                new BlockPos(
+                        (int) portalInfo.pos.x,
+                        (int) portalInfo.pos.y,
+                        (int) portalInfo.pos.z),
+                Direction.Axis.X);
+
+        if (entity instanceof ServerPlayer) {
+            ((ServerPlayer) entity).teleportTo(destWorld, portalInfo.pos.x, portalInfo.pos.y, portalInfo.pos.z, portalInfo.yRot, portalInfo.xRot);
+        } else {
+
+            // Actual teleportation in Fabric
+            entity.changeDimension(destWorld);
+            entity.teleportTo(portalInfo.pos.x, portalInfo.pos.y, portalInfo.pos.z);
+            entity.setYRot(portalInfo.yRot);
+            entity.setXRot(portalInfo.xRot);
+
+            // Reset motion if needed
+            entity.setDeltaMovement(portalInfo.speed);
+        }
     }
+
+
 }

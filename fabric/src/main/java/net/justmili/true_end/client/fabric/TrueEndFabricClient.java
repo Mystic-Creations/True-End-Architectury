@@ -13,7 +13,12 @@ public class TrueEndFabricClient implements ClientModInitializer {
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.SAPLING.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.GLASS.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.SAPLING.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.LEAVES.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.ROSE.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.FLOWER.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.TRAPDOOR.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.DOOR.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(TrueEndBlocks.BEYOND_THE_DREAM_PORTAL.get(), RenderType.cutout());
         EntityRendererRegistry.register(TrueEndEntities.UNKNOWN.get(), UnknownEntityRenderer.UnknownRenderer::new);
     }
 }
