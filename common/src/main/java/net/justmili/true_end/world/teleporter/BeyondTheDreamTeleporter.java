@@ -28,7 +28,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Comparator;
 
-public class BeyondTheDreamTeleporter extends PortalForcer { // Architectury-compatible
+public class BeyondTheDreamTeleporter extends PortalForcer {
 
     private final ServerLevel level;
     private final BlockPos entityEnterPos;

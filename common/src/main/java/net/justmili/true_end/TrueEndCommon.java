@@ -50,7 +50,7 @@ public final class TrueEndCommon {
         TrueEndParticleTypes.register();
         TrueEndPoiTypes.register();
         TrueEndEntities.register();
-        TrueEndFireBlocks.register();
+        queueServerWork(2, TrueEndFireBlocks::register);
 
         registerEvents();
 

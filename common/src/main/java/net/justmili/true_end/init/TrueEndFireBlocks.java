@@ -7,7 +7,7 @@ public class TrueEndFireBlocks {
     public static ArsonRegistry REGISTRY = ArsonRegistry.createInstance();
 
     public static ArsonRegistryReference WOOD = REGISTRY.registerBlockEntry(TrueEndBlocks.WOOD.get(), new ArsonRegistry.Arsonabilty(20, 40));
-    public static ArsonRegistryReference WOOD_SIX_SIDED = REGISTRY.registerBlockEntry(TrueEndBlocks.WOOD.get(), new ArsonRegistry.Arsonabilty(20, 40));
+    public static ArsonRegistryReference WOOD_SIX_SIDED = REGISTRY.registerBlockEntry(TrueEndBlocks.WOOD_6_SIDED.get(), new ArsonRegistry.Arsonabilty(20, 40));
     public static ArsonRegistryReference FENCE = REGISTRY.registerBlockEntry(TrueEndBlocks.FENCE.get(), new ArsonRegistry.Arsonabilty(20, 40));
     public static ArsonRegistryReference FENCE_GATE = REGISTRY.registerBlockEntry(TrueEndBlocks.FENCE_GATE.get(), new ArsonRegistry.Arsonabilty(20, 40));
     public static ArsonRegistryReference DOOR = REGISTRY.registerBlockEntry(TrueEndBlocks.DOOR.get(), new ArsonRegistry.Arsonabilty(20, 40));
