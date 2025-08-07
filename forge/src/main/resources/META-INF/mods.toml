@@ -33,3 +33,10 @@ mandatory = true
 versionRange = "[9.2.14,)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.true_end]]
+modId = "terrablender"
+mandatory = true
+versionRange = "[3.0.1.10,)"
+ordering = "NONE"
+side = "BOTH"
