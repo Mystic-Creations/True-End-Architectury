@@ -5,10 +5,14 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.justmili.true_end.TrueEndCommon;
 import net.fabricmc.api.ModInitializer;
 import net.justmili.true_end.commands.DevCommand;
+import net.justmili.true_end.world.seeping_reality.fabric.SeepingForestRegion;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
+import terrablender.api.Regions;
+import terrablender.api.TerraBlenderApi;
 
-public final class TrueEndFabric implements ModInitializer {
+public final class TrueEndFabric implements ModInitializer, TerraBlenderApi {
 
     @Override
     public void onInitialize() {
@@ -22,5 +26,11 @@ public final class TrueEndFabric implements ModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             DevCommand.register(dispatcher);
         });
+    }
+    @Override
+    public void onTerraBlenderInitialized()
+    {
+        Regions.register(new SeepingForestRegion(new ResourceLocation("true_end:overworld_region"), 1));
+
     }
 }
