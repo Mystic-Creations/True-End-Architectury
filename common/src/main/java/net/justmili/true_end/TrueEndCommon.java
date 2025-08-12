@@ -3,6 +3,8 @@ package net.justmili.true_end;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import dev.architectury.event.events.common.*;
+import net.justmili.true_end.commands.ConfigCmd;
+import net.justmili.true_end.commands.DeveloperCmd;
 import net.justmili.true_end.config.TrueEndConfig;
 import net.justmili.true_end.init.*;
 import net.justmili.true_end.procedures.DimSwapToBTD;
@@ -50,6 +52,10 @@ public final class TrueEndCommon {
         TrueEndParticleTypes.register();
         TrueEndPoiTypes.register();
         TrueEndEntities.register();
+
+        DeveloperCmd.register();
+        ConfigCmd.register();
+
         queueServerWork(2, TrueEndFireBlocks::register);
 
         registerEvents();
