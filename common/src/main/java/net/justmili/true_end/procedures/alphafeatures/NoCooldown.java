@@ -1,10 +1,9 @@
 
 package net.justmili.true_end.procedures.alphafeatures;
 
-import net.justmili.true_end.init.TrueEndDimKeys;
+import net.justmili.true_end.init.TEDimKeys;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -31,7 +30,7 @@ public class NoCooldown {
         AttributeInstance attackSpeedAttr = player.getAttribute(Attributes.ATTACK_SPEED);
         if (attackSpeedAttr == null) return;
 
-        if (toDim.equals(TrueEndDimKeys.BTD)) {
+        if (toDim.equals(TEDimKeys.BTD)) {
             attackSpeedAttr.addPermanentModifier(modifier);
         } else {
             attackSpeedAttr.removeModifier(modifier);

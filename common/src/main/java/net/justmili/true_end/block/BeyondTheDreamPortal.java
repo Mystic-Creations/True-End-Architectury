@@ -1,12 +1,11 @@
 package net.justmili.true_end.block;
 
-import net.justmili.true_end.init.TrueEndParticleTypes;
+import net.justmili.true_end.init.TEParticleTypes;
 import net.justmili.true_end.world.teleporter.BeyondTheDreamPortalShape;
 import net.justmili.true_end.world.teleporter.BeyondTheDreamTeleporter;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 
 
@@ -28,10 +27,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.portal.PortalInfo;
 
-import java.util.Objects;
 import java.util.Optional;
 
-import static net.justmili.true_end.init.TrueEndDimKeys.BTD;
+import static net.justmili.true_end.init.TEDimKeys.BTD;
 
 public class BeyondTheDreamPortal extends NetherPortalBlock {
     public BeyondTheDreamPortal() {
@@ -77,7 +75,7 @@ public class BeyondTheDreamPortal extends NetherPortalBlock {
                 pz = pos.getZ() + 0.5 + 0.25 * j;
                 vz = random.nextFloat() * 2 * j;
             }
-            world.addParticle(TrueEndParticleTypes.DREAM_PORTAL_PARTICLE.get(), px, py, pz, vx, vy, vz);
+            world.addParticle(TEParticleTypes.DREAM_PORTAL_PARTICLE.get(), px, py, pz, vx, vy, vz);
         }
         if (random.nextInt(110) == 0)
             world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvent.createVariableRangeEvent(new ResourceLocation("block.portal.ambient")), SoundSource.BLOCKS, 0.5f, random.nextFloat() * 0.4f + 0.8f);

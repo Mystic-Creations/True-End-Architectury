@@ -1,11 +1,10 @@
 package net.justmili.true_end.variables;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 
-public class TrueEndVariables {
+public class TEVariables {
 
     @ExpectPlatform
     public static PlayerData getPlayerData(ServerPlayer player) {

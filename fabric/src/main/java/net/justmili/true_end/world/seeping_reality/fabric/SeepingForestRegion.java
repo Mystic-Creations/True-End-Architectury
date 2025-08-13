@@ -1,7 +1,7 @@
 package net.justmili.true_end.world.seeping_reality.fabric;
 
 import com.mojang.datafixers.util.Pair;
-import net.justmili.true_end.init.TrueEndBiomes;
+import net.justmili.true_end.init.TEBiomes;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -30,7 +30,7 @@ public class SeepingForestRegion extends Region {
                 .weirdness(ParameterUtils.Weirdness.span(
                         ParameterUtils.Weirdness.MID_SLICE_NORMAL_ASCENDING,
                         ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING)) // slight variety
-                .build().forEach(point -> builder.add(point, TrueEndBiomes.SEEPING_REALITY));
+                .build().forEach(point -> builder.add(point, TEBiomes.SEEPING_REALITY));
         builder.build().forEach(mapper);
     }
 

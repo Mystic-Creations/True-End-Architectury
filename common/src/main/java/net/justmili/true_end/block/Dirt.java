@@ -1,7 +1,7 @@
 package net.justmili.true_end.block;
 
 
-import net.justmili.true_end.init.TrueEndBlocks;
+import net.justmili.true_end.init.TEBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -39,7 +39,7 @@ public class Dirt extends Block {
             // Keep as dirt
         } else {
             if (!world.isClientSide()) {
-                world.setBlock(pos, TrueEndBlocks.GRASS_BLOCK.get().defaultBlockState(), 3);
+                world.setBlock(pos, TEBlocks.GRASS_BLOCK.get().defaultBlockState(), 3);
             }
         }
     }
@@ -51,7 +51,7 @@ public class Dirt extends Block {
         int y = pos.getY();
         int z = pos.getZ();
         if (entity.getMainHandItem().is(ItemTags.HOES)) {
-            world.setBlock(BlockPos.containing(x, y, z), TrueEndBlocks.FARMLAND.get().defaultBlockState(), 3);
+            world.setBlock(BlockPos.containing(x, y, z), TEBlocks.FARMLAND.get().defaultBlockState(), 3);
             if (world.isClientSide()) {
                 world.playLocalSound(x, y, z, SoundEvent.createVariableRangeEvent(new ResourceLocation("item.hoe.till")), SoundSource.BLOCKS, 1, 1, false);
             } else {
@@ -81,7 +81,7 @@ private static boolean canBeGrass(BlockState state, LevelReader world, BlockPos 
                 BlockPos neighborPos = pos.offset(x, y, z);
                 BlockState neighborState = world.getBlockState(neighborPos);
 
-                if (neighborState.is(TrueEndBlocks.GRASS_BLOCK.get())) {
+                if (neighborState.is(TEBlocks.GRASS_BLOCK.get())) {
                     return true;
                 }
             }

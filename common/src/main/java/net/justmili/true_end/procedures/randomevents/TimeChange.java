@@ -1,6 +1,6 @@
 package net.justmili.true_end.procedures.randomevents;
 
-import net.justmili.true_end.config.TrueEndConfig;
+import net.justmili.true_end.config.TEConfig;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -12,7 +12,7 @@ public class TimeChange {
     public static final int MIDNIGHT = 18000;
 
     public static void onPlayerTick(Player player) {
-        if (!TrueEndConfig.randomEventsToggle) return;
+        if (!TEConfig.randomEventsToggle) return;
         if (!(player instanceof ServerPlayer serverPlayer)) return;
 
         ServerLevel world = (ServerLevel) player.level();
@@ -25,7 +25,7 @@ public class TimeChange {
     }
 
     public static void makeNight(ServerPlayer player) {
-        if (!(Math.random() < (TrueEndConfig.randomEventChance/64))) return;
+        if (!(Math.random() < (TEConfig.randomEventChance/64))) return;
         ServerLevel world = (ServerLevel) player.level();
         long time = world.getDayTime() % 24000;
         if (time > DAY && time < NIGHT) {
@@ -36,7 +36,7 @@ public class TimeChange {
     }
 
     public static void makeDay(ServerPlayer player) {
-        if (!(Math.random() < (TrueEndConfig.randomEventChance/64))) return;
+        if (!(Math.random() < (TEConfig.randomEventChance/64))) return;
         ServerLevel world = (ServerLevel) player.level();
         long time = world.getDayTime() % 24000;
         boolean isNight = time >= MIDNIGHT || time < DAY;

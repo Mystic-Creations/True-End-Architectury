@@ -9,7 +9,7 @@ import org.slf4j.event.Level;
 import java.util.Map;
 import java.util.HashMap;
 
-public class TrueEndConfig {
+public class TEConfig {
 
     public static final GsonSerializer serializer = new GsonSerializer("TrueEnd_COMMON");
     public static Map<String, Object> entries;
@@ -26,7 +26,7 @@ public class TrueEndConfig {
     public static boolean clearDreamItems = true;
 
     public static void setup() {
-        Map<String, Object> entries = TrueEndConfig.serializer.deserialize();
+        Map<String, Object> entries = TEConfig.serializer.deserialize();
         entries = entries == null ? new HashMap<>() : entries;
 
         entries.putIfAbsent("randomEventChance", 0.005d);
@@ -51,10 +51,10 @@ public class TrueEndConfig {
         daytimeChangeToggle = (boolean) entries.get("daytimeChangeToggle");
         clearDreamItems = (boolean) entries.get("clearDreamItems");
 
-        TrueEndConfig.entries = entries;
-        serializer.serialize(TrueEndConfig.entries);
+        TEConfig.entries = entries;
+        serializer.serialize(TEConfig.entries);
         TrueEndCommon.LOGGER.info("[TrueEnd] Successfully loaded TrueEnd Config!");
-        TrueEndCommon.LOGGER.atLevel(Level.DEBUG).log(TrueEndConfig.serializer.getMessage());
+        TrueEndCommon.LOGGER.atLevel(Level.DEBUG).log(TEConfig.serializer.getMessage());
     }
 
     public static void updateConfig(String key, Object value) {

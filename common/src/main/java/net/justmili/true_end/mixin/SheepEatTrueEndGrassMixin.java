@@ -1,6 +1,6 @@
 package net.justmili.true_end.mixin;
 
-import net.justmili.true_end.init.TrueEndBlocks;
+import net.justmili.true_end.init.TEBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.EatBlockGoal;
@@ -36,7 +36,7 @@ public class SheepEatTrueEndGrassMixin {
             cir.setReturnValue(false);
         } else {
             BlockPos blockpos = this.mob.blockPosition();
-            cir.setReturnValue(IS_TALL_GRASS.test(this.level.getBlockState(blockpos)) || this.level.getBlockState(blockpos.below()).is(TrueEndBlocks.GRASS_BLOCK.get()));
+            cir.setReturnValue(IS_TALL_GRASS.test(this.level.getBlockState(blockpos)) || this.level.getBlockState(blockpos.below()).is(TEBlocks.GRASS_BLOCK.get()));
         }
     }
 
@@ -61,9 +61,9 @@ public class SheepEatTrueEndGrassMixin {
 
                     this.mob.ate();
                 }
-                if (this.level.getBlockState(blockPos2).is(TrueEndBlocks.GRASS_BLOCK.get())) {
+                if (this.level.getBlockState(blockPos2).is(TEBlocks.GRASS_BLOCK.get())) {
                     if (this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
-                        this.level.levelEvent(2001, blockPos2, Block.getId(TrueEndBlocks.GRASS_BLOCK.get().defaultBlockState()));
+                        this.level.levelEvent(2001, blockPos2, Block.getId(TEBlocks.GRASS_BLOCK.get().defaultBlockState()));
                         this.level.setBlock(blockPos2, Blocks.DIRT.defaultBlockState(), 2);
                     }
 

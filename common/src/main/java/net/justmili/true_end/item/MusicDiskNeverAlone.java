@@ -1,7 +1,7 @@
 
 package net.justmili.true_end.item;
 
-import net.justmili.true_end.init.TrueEndSounds;
+import net.justmili.true_end.init.TESounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MusicDiskNeverAlone extends RecordItem {
     public MusicDiskNeverAlone() {
-        super(8, TrueEndSounds.MUSIC_NEVER_ALONE.get(), new Properties().stacksTo(1).rarity(Rarity.RARE), 5180);
+        super(8, TESounds.MUSIC_NEVER_ALONE.get(), new Properties().stacksTo(1).rarity(Rarity.RARE), 5180);
     }
 
     @Override

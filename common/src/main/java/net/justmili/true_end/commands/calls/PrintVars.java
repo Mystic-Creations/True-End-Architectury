@@ -1,16 +1,15 @@
 package net.justmili.true_end.commands.calls;
 
-import net.justmili.true_end.config.TrueEndConfig;
+import net.justmili.true_end.config.TEConfig;
 import net.justmili.true_end.variables.PlayerData;
-import net.justmili.true_end.variables.TrueEndVariables;
+import net.justmili.true_end.variables.TEVariables;
 import net.justmili.true_end.variables.WorldData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 
-import static net.justmili.true_end.init.TrueEndDimKeys.BTD;
+import static net.justmili.true_end.init.TEDimKeys.BTD;
 
 public class PrintVars {
 
@@ -18,7 +17,7 @@ public class PrintVars {
         if (player == null || source == null)
             return;
 
-        WorldData getVariable = TrueEndVariables.getLevelData(world);
+        WorldData getVariable = TEVariables.getLevelData(world);
 
         int btdSpawnX = (int) getVariable.getBtdSpawnX();
         int btdSpawnY = (int) getVariable.getBtdSpawnY();
@@ -27,7 +26,7 @@ public class PrintVars {
         // Player vars
         source.sendSystemMessage(Component.literal("----= Per-Player"));
         for (ServerPlayer otherPlayer : player.server.getPlayerList().getPlayers()) {
-            PlayerData vars = TrueEndVariables.getPlayerData(otherPlayer);
+            PlayerData vars = TEVariables.getPlayerData(otherPlayer);
             source.sendSystemMessage(
                     Component.literal("beenBeyond (" + otherPlayer.getName().getString() + "): " + vars.getBeenBeyond())
             );
@@ -43,14 +42,14 @@ public class PrintVars {
         source.sendSystemMessage(Component.literal("unknownInWorld: " + getVariable.isUnknownInWorld()));
         // Config vars
         source.sendSystemMessage(Component.literal("\n----= Config Variables"));
-        source.sendSystemMessage(Component.literal("btdConversationDelay: " + TrueEndConfig.btdConversationDelay));
-        source.sendSystemMessage(Component.literal("randomEventChance: " + TrueEndConfig.randomEventChance));
-        source.sendSystemMessage(Component.literal("entitySpawnChance: " + TrueEndConfig.entitySpawnChance));
-        source.sendSystemMessage(Component.literal("creditsToggle: " + TrueEndConfig.creditsToggle));
-        source.sendSystemMessage(Component.literal("popupsToggle: " + TrueEndConfig.popupsToggle));
-        source.sendSystemMessage(Component.literal("fogToggle: " + TrueEndConfig.fogToggle));
-        source.sendSystemMessage(Component.literal("daytimeChangeToggle: " + TrueEndConfig.daytimeChangeToggle));
-        source.sendSystemMessage(Component.literal("clearDreamItems: " + TrueEndConfig.daytimeChangeToggle));
-        source.sendSystemMessage(Component.literal("flashingLights: " + TrueEndConfig.flashingLights));
+        source.sendSystemMessage(Component.literal("btdConversationDelay: " + TEConfig.btdConversationDelay));
+        source.sendSystemMessage(Component.literal("randomEventChance: " + TEConfig.randomEventChance));
+        source.sendSystemMessage(Component.literal("entitySpawnChance: " + TEConfig.entitySpawnChance));
+        source.sendSystemMessage(Component.literal("creditsToggle: " + TEConfig.creditsToggle));
+        source.sendSystemMessage(Component.literal("popupsToggle: " + TEConfig.popupsToggle));
+        source.sendSystemMessage(Component.literal("fogToggle: " + TEConfig.fogToggle));
+        source.sendSystemMessage(Component.literal("daytimeChangeToggle: " + TEConfig.daytimeChangeToggle));
+        source.sendSystemMessage(Component.literal("clearDreamItems: " + TEConfig.daytimeChangeToggle));
+        source.sendSystemMessage(Component.literal("flashingLights: " + TEConfig.flashingLights));
     }
 }

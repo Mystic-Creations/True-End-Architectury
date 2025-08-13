@@ -3,7 +3,7 @@ package net.justmili.true_end.entity;
 import java.util.EnumSet;
 import java.util.Random;
 
-import net.justmili.true_end.variables.TrueEndVariables;
+import net.justmili.true_end.variables.TEVariables;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -159,7 +159,7 @@ public class Unknown extends AmbientCreature {
         getNavigation().stop();
         if (!(level() instanceof ServerLevel serverLevel)) return;
         level().playSound(null, blockPosition(), SoundEvents.AMBIENT_CAVE.value(), SoundSource.MASTER, 1, 1);
-        TrueEndVariables.getLevelData(serverLevel).setUnknownInWorld(false);
+        TEVariables.getLevelData(serverLevel).setUnknownInWorld(false);
         remove(RemovalReason.DISCARDED);
         BlockState state = level().getBlockState(blockPosition());
         level().updateNeighborsAt(blockPosition(), state.getBlock());

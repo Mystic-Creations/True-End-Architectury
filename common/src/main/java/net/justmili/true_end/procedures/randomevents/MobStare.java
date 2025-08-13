@@ -1,8 +1,7 @@
 package net.justmili.true_end.procedures.randomevents;
 
 import net.justmili.true_end.TrueEndCommon;
-import net.justmili.true_end.config.TrueEndConfig;
-import net.minecraft.server.MinecraftServer;
+import net.justmili.true_end.config.TEConfig;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Mob;
@@ -24,8 +23,8 @@ public class MobStare {
                 updateStare(level);
                 return;
             }
-            if (TrueEndConfig.randomEventsToggle) {
-                if (stareMap.isEmpty() && RANDOM.nextDouble() < TrueEndConfig.randomEventChance) {
+            if (TEConfig.randomEventsToggle) {
+                if (stareMap.isEmpty() && RANDOM.nextDouble() < TEConfig.randomEventChance) {
                     lastEventTick = worldTick;
                     TrueEndCommon.LOGGER.info("[MobStare] Starting stare event");
 

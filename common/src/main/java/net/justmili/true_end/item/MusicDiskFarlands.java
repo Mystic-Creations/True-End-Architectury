@@ -1,7 +1,7 @@
 
 package net.justmili.true_end.item;
 
-import net.justmili.true_end.init.TrueEndSounds;
+import net.justmili.true_end.init.TESounds;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.RecordItem;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MusicDiskFarlands extends RecordItem {
     public MusicDiskFarlands() {
-        super(8, TrueEndSounds.MUSIC_FARLANDS.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 2540);
+        super(8, TESounds.MUSIC_FARLANDS.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 2540);
     }
 
     @Override

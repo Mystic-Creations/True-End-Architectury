@@ -1,8 +1,8 @@
 package net.justmili.true_end.procedures;
 
 import net.justmili.true_end.TrueEndCommon;
-import net.justmili.true_end.config.TrueEndConfig;
-import net.justmili.true_end.variables.TrueEndVariables;
+import net.justmili.true_end.config.TEConfig;
+import net.justmili.true_end.variables.TEVariables;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -17,12 +17,12 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.Random;
 
-import static net.justmili.true_end.init.TrueEndDimKeys.BTD;
+import static net.justmili.true_end.init.TEDimKeys.BTD;
 
 public class PlayerInvManager {
     private static final double RETURN_CHANCE = 0.90;
     private static final Random RAND = new Random();
-    private static final File saveDir = TrueEndConfig.serializer.configFile.getParentFile();
+    private static final File saveDir = TEConfig.serializer.configFile.getParentFile();
     private static String makeBackupFilename(ServerPlayer player, String suffix) {
         Path worldFolder = player.getServer().getWorldPath(LevelResource.LEVEL_DATA_FILE).getParent();
         String folderName = worldFolder.getFileName().toString();
@@ -33,7 +33,7 @@ public class PlayerInvManager {
 
     // BTD player inv management
     public static void saveInvBTD(ServerPlayer player) {
-        if (!TrueEndConfig.clearDreamItems) return;
+        if (!TEConfig.clearDreamItems) return;
 
         CompoundTag fullNbt = getPlayerNBT(player);
 
@@ -73,7 +73,7 @@ public class PlayerInvManager {
 
     // NWAD player inv management
     public static void saveInvNWAD(ServerPlayer player) {
-        if (!TrueEndConfig.clearDreamItems) return;
+        if (!TEConfig.clearDreamItems) return;
         CompoundTag fullNbt = getPlayerNBT(player);
         //if (FabricLoader.getInstance().isModLoaded("trinkets")) {
         //    CompoundTag fullNbt = player.serializeNBT();
@@ -137,7 +137,7 @@ public class PlayerInvManager {
     }
 
     public static void restoreInvWithChance(ServerPlayer player) {
-        if (!TrueEndConfig.clearDreamItems) return;
+        if (!TEConfig.clearDreamItems) return;
         File in = new File(saveDir, makeBackupFilename(player, "BTD"));
         if (!in.exists()) return;
 
@@ -198,7 +198,7 @@ public class PlayerInvManager {
     }
 
     public static void restoreInv(ServerPlayer player) {
-        if (!TrueEndConfig.clearDreamItems) return;
+        if (!TEConfig.clearDreamItems) return;
         File in = new File(saveDir, makeBackupFilename(player, "NWAD"));
         if (!in.exists()) return;
 
@@ -265,9 +265,9 @@ public class PlayerInvManager {
 
     public static void onDimensionChange(ServerPlayer player, ResourceKey<Level> fromDimension,  ResourceKey<Level> toDimension) {
         if (fromDimension != BTD) return;
-        if (!TrueEndConfig.clearDreamItems) return;
+        if (!TEConfig.clearDreamItems) return;
 
-        if (TrueEndVariables.getPlayerData(player).getBeenBeyond()) {
+        if (TEVariables.getPlayerData(player).getBeenBeyond()) {
                 player.getInventory().clearContent();
                 PlayerInvManager.restoreInvWithChance(player);
         }

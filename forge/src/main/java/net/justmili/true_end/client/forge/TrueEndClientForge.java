@@ -1,10 +1,7 @@
 package net.justmili.true_end.client.forge;
 
-import net.justmili.true_end.TrueEndCommon;
 import net.justmili.true_end.client.TrueEndCommonClient;
-import net.justmili.true_end.client.renderer.UnknownEntityRenderer;
 import net.justmili.true_end.forge.TrueEndForge;
-import net.justmili.true_end.init.TrueEndEntities;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

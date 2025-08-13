@@ -1,8 +1,8 @@
 package net.justmili.true_end.procedures;
 
 import com.mojang.datafixers.util.Pair;
-import net.justmili.true_end.config.TrueEndConfig;
-import net.justmili.true_end.variables.TrueEndVariables;
+import net.justmili.true_end.config.TEConfig;
+import net.justmili.true_end.variables.TEVariables;
 import net.justmili.true_end.variables.WorldData;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.Direction;
@@ -25,21 +25,18 @@ import net.minecraft.network.protocol.game.ClientboundPlayerAbilitiesPacket;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.justmili.true_end.init.TrueEndBlocks;
+import net.justmili.true_end.init.TEBlocks;
 import net.justmili.true_end.TrueEndCommon;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.level.storage.LevelData;
-import org.apache.logging.log4j.core.net.ssl.TrustStoreConfigurationException;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
-import static net.justmili.true_end.init.TrueEndDimKeys.BTD;
+import static net.justmili.true_end.init.TEDimKeys.BTD;
 
 public class DimSwapToBTD {
     private static final Map<ServerPlayer, Boolean> HAS_PROCESSED = new HashMap<>();
@@ -56,7 +53,7 @@ public class DimSwapToBTD {
         if (advancement.getId().equals(new ResourceLocation("true_end:stop_dreaming"))) {
             if (HAS_PROCESSED.getOrDefault(player, false)) return;
 
-            if (!TrueEndVariables.getPlayerData(player).getBeenBeyond())
+            if (!TEVariables.getPlayerData(player).getBeenBeyond())
                 if (player.level().dimension() == Level.OVERWORLD
                         && player.level() instanceof ServerLevel overworld
                         && player.getAdvancements().getOrStartProgress(
@@ -70,7 +67,7 @@ public class DimSwapToBTD {
                     }
                     player.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 
-                    WorldData levelData = TrueEndVariables.getLevelData(nextLevel.getLevel());
+                    WorldData levelData = TEVariables.getLevelData(nextLevel.getLevel());
                     double btdSpawnX = levelData.getBtdSpawnX();
                     double btdSpawnY = levelData.getBtdSpawnY();
                     double btdSpawnZ = levelData.getBtdSpawnZ();
@@ -80,11 +77,11 @@ public class DimSwapToBTD {
                         for (MobEffectInstance effect : player.getActiveEffects()) player.connection.send(new ClientboundUpdateMobEffectPacket(player.getId(), effect));
                         sendFirstEntryConversation(player);
                         executeCommand(nextLevel, player, "function true_end:btd_global_spawn");
-                        TrueEndVariables.getPlayerData(player).setBeenBeyond(true);
+                        TEVariables.getPlayerData(player).setBeenBeyond(true);
                         HAS_PROCESSED.remove(player);
                         PlayerInvManager.saveInvBTD(player);
                         //PlayerInvManager.clearCuriosSlots(player);
-                        if (TrueEndConfig.clearDreamItems) player.getInventory().clearContent();
+                        if (TEConfig.clearDreamItems) player.getInventory().clearContent();
                         return;
                     }
 
@@ -134,18 +131,18 @@ public class DimSwapToBTD {
                             executeCommand(nextLevel, player, "function true_end:build_home");
                             setGlobalSpawn(nextLevel, player);
                             sendFirstEntryConversation(player);
-                            TrueEndVariables.getPlayerData(player).setBeenBeyond(true);
+                            TEVariables.getPlayerData(player).setBeenBeyond(true);
                             if (secFinalSpawnPos == null) {
-                                TrueEndVariables.getLevelData(nextLevel).setBtdSpawn(finalSpawnPos.getX(), finalSpawnPos.getY() -1, finalSpawnPos.getZ());
+                                TEVariables.getLevelData(nextLevel).setBtdSpawn(finalSpawnPos.getX(), finalSpawnPos.getY() -1, finalSpawnPos.getZ());
                             } else {
-                                TrueEndVariables.getLevelData(nextLevel).setBtdSpawn(secFinalSpawnPos.getX(), secFinalSpawnPos.getY() -1, secFinalSpawnPos.getZ());
+                                TEVariables.getLevelData(nextLevel).setBtdSpawn(secFinalSpawnPos.getX(), secFinalSpawnPos.getY() -1, secFinalSpawnPos.getZ());
                             }
                             HAS_PROCESSED.remove(player);
                         } );
 
                         PlayerInvManager.saveInvBTD(player);
                         //PlayerInvManager.clearCuriosSlots(player);
-                        if (TrueEndConfig.clearDreamItems) player.getInventory().clearContent();
+                        if (TEConfig.clearDreamItems) player.getInventory().clearContent();
                     });
             }
         }
@@ -160,7 +157,7 @@ public class DimSwapToBTD {
                     BlockPos above = candidate.above();
                     BlockPos above2 = above.above();
 
-                    if (level.getBlockState(candidate).is(TrueEndBlocks.GRASS_BLOCK.get())
+                    if (level.getBlockState(candidate).is(TEBlocks.GRASS_BLOCK.get())
                             && level.getBiome(candidate).is(new ResourceLocation("true_end:plains"))
                             && notOnAfuckingHill(level, candidate)
                             && isYInSpawnRange(level, candidate)
@@ -185,7 +182,7 @@ public class DimSwapToBTD {
                 for (int z = -searchRadius; z <= searchRadius; z++) {
                     BlockPos candidate = centerPos.offset(x, y - centerPos.getY(), z);
                     BlockPos above = candidate.above();
-                    if (level.getBlockState(candidate).is(TrueEndBlocks.GRASS_BLOCK.get())
+                    if (level.getBlockState(candidate).is(TEBlocks.GRASS_BLOCK.get())
                             && level.getBiome(candidate).is(new ResourceLocation("true_end:plains"))
                             && notOnAfuckingHill(level, candidate)
                             && isYInSpawnRange(level, candidate)
@@ -201,7 +198,7 @@ public class DimSwapToBTD {
         return null;
     }
     public static void setGlobalSpawn(ServerLevel world, ServerPlayer player) {
-        TrueEndVariables.getLevelData(world).setBtdSpawn(player.getX(), player.getY(), player.getZ());
+        TEVariables.getLevelData(world).setBtdSpawn(player.getX(), player.getY(), player.getZ());
     }
 
     private static Predicate<Holder<Biome>> isBiome(String biomeNamespaced) {
@@ -230,8 +227,8 @@ public class DimSwapToBTD {
                 if (existing.isAir()
                         || existing.getFluidState().is(FluidTags.WATER)
                         || existing.getFluidState().is(FluidTags.LAVA)
-                        || existing.is(TrueEndBlocks.GRASS_BLOCK.get())
-                        || existing.is(TrueEndBlocks.SAND.get())) {
+                        || existing.is(TEBlocks.GRASS_BLOCK.get())
+                        || existing.is(TEBlocks.SAND.get())) {
 
                     placeGrassWithDirt(world, grassPos);
                 }
@@ -269,8 +266,8 @@ public class DimSwapToBTD {
                 if (existing.isAir()
                         || existing.getFluidState().is(FluidTags.WATER)
                         || existing.getFluidState().is(FluidTags.LAVA)
-                        || existing.is(TrueEndBlocks.GRASS_BLOCK.get())
-                        || existing.is(TrueEndBlocks.SAND.get())) {
+                        || existing.is(TEBlocks.GRASS_BLOCK.get())
+                        || existing.is(TEBlocks.SAND.get())) {
 
                     placeGrassWithDirt(world, grassPos);
                 }
@@ -285,11 +282,11 @@ public class DimSwapToBTD {
         if (!existing.isAir()
                 && !existing.getFluidState().is(FluidTags.WATER)
                 && !existing.getFluidState().is(FluidTags.LAVA)
-                && !existing.is(TrueEndBlocks.GRASS_BLOCK.get())
-                && !existing.is(TrueEndBlocks.SAND.get())) {
+                && !existing.is(TEBlocks.GRASS_BLOCK.get())
+                && !existing.is(TEBlocks.SAND.get())) {
             return;
         }
-        world.setBlock(clampedPos, TrueEndBlocks.GRASS_BLOCK.get().defaultBlockState(), 3);
+        world.setBlock(clampedPos, TEBlocks.GRASS_BLOCK.get().defaultBlockState(), 3);
         BlockPos.MutableBlockPos mutablePos = clampedPos.mutable();
 
         for (int yy = clampedPos.getY() - 1; yy >= world.getMinBuildHeight(); yy--) {
@@ -299,12 +296,12 @@ public class DimSwapToBTD {
             if (!current.isAir()
                     && !current.getFluidState().is(FluidTags.WATER)
                     && !current.getFluidState().is(FluidTags.LAVA)
-                    && !current.is(TrueEndBlocks.GRASS_BLOCK.get())
-                    && !current.is(TrueEndBlocks.DIRT.get())
-                    && !current.is(TrueEndBlocks.SAND.get())) {
+                    && !current.is(TEBlocks.GRASS_BLOCK.get())
+                    && !current.is(TEBlocks.DIRT.get())
+                    && !current.is(TEBlocks.SAND.get())) {
                 break;
             }
-            world.setBlock(mutablePos, TrueEndBlocks.DIRT.get().defaultBlockState(), 3);
+            world.setBlock(mutablePos, TEBlocks.DIRT.get().defaultBlockState(), 3);
         }
     }
     // Smooth gradient function
@@ -319,8 +316,8 @@ public class DimSwapToBTD {
         for (int y = maxY; y >= 0; y--) {
             BlockPos checkPos = new BlockPos(pos.getX(), y, pos.getZ());
             if (world.getBlockState(checkPos).getBlock() != net.minecraft.world.level.block.Blocks.AIR &&
-                    world.getBlockState(checkPos).getBlock() != TrueEndBlocks.WOOD.get() &&
-                    world.getBlockState(checkPos).getBlock() != TrueEndBlocks.LEAVES.get()) {
+                    world.getBlockState(checkPos).getBlock() != TEBlocks.WOOD.get() &&
+                    world.getBlockState(checkPos).getBlock() != TEBlocks.LEAVES.get()) {
                 if (y < pos.getY()) {
                     return y - 1;
                 } else {
@@ -368,9 +365,9 @@ public class DimSwapToBTD {
                 if (stateAtFeet.is(net.minecraft.world.level.block.Blocks.WATER)
                         || stateBelow.is(net.minecraft.world.level.block.Blocks.WATER)
                         || stateBelow2.is(net.minecraft.world.level.block.Blocks.WATER)
-                        || stateAtFeet.is(TrueEndBlocks.SAND.get())
-                        || stateBelow.is(TrueEndBlocks.SAND.get())
-                        || stateBelow2.is(TrueEndBlocks.SAND.get())) {
+                        || stateAtFeet.is(TEBlocks.SAND.get())
+                        || stateBelow.is(TEBlocks.SAND.get())
+                        || stateBelow2.is(TEBlocks.SAND.get())) {
                     return false;
                 }
             }
@@ -481,7 +478,7 @@ public class DimSwapToBTD {
 
         //Play text
         TrueEndCommon.queueServerWork(45, () -> {
-            TrueEndCommon.messageWithCooldown(player, jsonLines.toArray(new String[0]), TrueEndConfig.btdConversationDelay);
+            TrueEndCommon.messageWithCooldown(player, jsonLines.toArray(new String[0]), TEConfig.btdConversationDelay);
         });
     }
 }

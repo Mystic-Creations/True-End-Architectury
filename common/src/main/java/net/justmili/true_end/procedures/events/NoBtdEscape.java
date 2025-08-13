@@ -1,7 +1,7 @@
 package net.justmili.true_end.procedures.events;
 
 import dev.architectury.event.EventResult;
-import net.justmili.true_end.variables.TrueEndVariables;
+import net.justmili.true_end.variables.TEVariables;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static net.justmili.true_end.init.TrueEndDimKeys.BTD;
+import static net.justmili.true_end.init.TEDimKeys.BTD;
 
 public class NoBtdEscape {
     private static final Map<UUID, ResourceKey<Level>> diedIn = new HashMap<>();
@@ -31,9 +31,9 @@ public class NoBtdEscape {
         ResourceKey<Level> dim = diedIn.remove(uuid);
         if (dim == null || dim != BTD) return;
 
-        double bx = TrueEndVariables.getLevelData(player.server.getLevel(dim)).getBtdSpawnX();
-        double by = TrueEndVariables.getLevelData(player.server.getLevel(dim)).getBtdSpawnY();
-        double bz = TrueEndVariables.getLevelData(player.server.getLevel(dim)).getBtdSpawnZ();
+        double bx = TEVariables.getLevelData(player.server.getLevel(dim)).getBtdSpawnX();
+        double by = TEVariables.getLevelData(player.server.getLevel(dim)).getBtdSpawnY();
+        double bz = TEVariables.getLevelData(player.server.getLevel(dim)).getBtdSpawnZ();
         ServerLevel btd = player.server.getLevel(BTD);
         if (btd == null) return;
 

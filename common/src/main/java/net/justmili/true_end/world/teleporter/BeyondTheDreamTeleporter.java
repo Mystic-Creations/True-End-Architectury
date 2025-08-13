@@ -1,10 +1,8 @@
 package net.justmili.true_end.world.teleporter;
 
-import net.justmili.true_end.init.TrueEndBlocks;
-import net.justmili.true_end.init.TrueEndPoiTypes;
-import net.minecraft.resources.ResourceKey;
+import net.justmili.true_end.init.TEBlocks;
+import net.justmili.true_end.init.TEPoiTypes;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.PortalForcer;
@@ -24,7 +22,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.BlockUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Comparator;
 
@@ -45,7 +42,7 @@ public class BeyondTheDreamTeleporter extends PortalForcer {
         int radius = isNether ? 16 : 128;
         poimanager.ensureLoadedAndValid(this.level, pos, radius);
         Optional<PoiRecord> portal = poimanager.getInSquare(
-                        record -> record.is(TrueEndPoiTypes.BEYOND_THE_DREAM_PORTAL.getKey()),
+                        record -> record.is(TEPoiTypes.BEYOND_THE_DREAM_PORTAL.getKey()),
                         pos, radius, PoiManager.Occupancy.ANY
                 ).filter(record -> border.isWithinBounds(record.getPos()))
                 .sorted(Comparator.comparingDouble(r -> r.getPos().distSqr(pos)))
@@ -157,7 +154,7 @@ public class BeyondTheDreamTeleporter extends PortalForcer {
             for(int k = -1; k < 2; ++k) {
                 for(int l = 0; l < 2; ++l) {
                     for(int m = -1; m < 3; ++m) {
-                        BlockState blockState = m < 0 ? TrueEndBlocks.OBSIDIAN.get().defaultBlockState() : Blocks.AIR.defaultBlockState();
+                        BlockState blockState = m < 0 ? TEBlocks.OBSIDIAN.get().defaultBlockState() : Blocks.AIR.defaultBlockState();
                         mutableBlockPos.setWithOffset(blockPos, l * direction.getStepX() + k * direction2.getStepX(), m, l * direction.getStepZ() + k * direction2.getStepZ());
                         this.level.setBlockAndUpdate(mutableBlockPos, blockState);
                     }
@@ -169,12 +166,12 @@ public class BeyondTheDreamTeleporter extends PortalForcer {
             for(int p = -1; p < 4; ++p) {
                 if (o == -1 || o == 2 || p == -1 || p == 3) {
                     mutableBlockPos.setWithOffset(blockPos, o * direction.getStepX(), p, o * direction.getStepZ());
-                    this.level.setBlock(mutableBlockPos, TrueEndBlocks.OBSIDIAN.get().defaultBlockState(), 3);
+                    this.level.setBlock(mutableBlockPos, TEBlocks.OBSIDIAN.get().defaultBlockState(), 3);
                 }
             }
         }
 
-        BlockState blockState2 = (BlockState)TrueEndBlocks.BEYOND_THE_DREAM_PORTAL.get().defaultBlockState().setValue(NetherPortalBlock.AXIS, axis);
+        BlockState blockState2 = (BlockState) TEBlocks.BEYOND_THE_DREAM_PORTAL.get().defaultBlockState().setValue(NetherPortalBlock.AXIS, axis);
 
         for(int p = 0; p < 2; ++p) {
             for(int j = 0; j < 3; ++j) {

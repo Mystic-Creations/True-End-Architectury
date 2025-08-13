@@ -2,8 +2,8 @@ package net.justmili.true_end.procedures.events;
 
 import dev.architectury.event.EventResult;
 import net.justmili.true_end.TrueEndCommon;
-import net.justmili.true_end.config.TrueEndConfig;
-import net.justmili.true_end.init.TrueEndDimKeys;
+import net.justmili.true_end.config.TEConfig;
+import net.justmili.true_end.init.TEDimKeys;
 import net.justmili.true_end.procedures.randomevents.TimeChange;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
@@ -60,8 +60,8 @@ public class ChatReplies {
         }
     }
     public static void randomReplies(LevelAccessor world, ServerPlayer player) {
-        if (player.level().dimension() == TrueEndDimKeys.BTD) return;
-        if (!(Math.random() < (TrueEndConfig.randomEventChance)/48)) return;
+        if (player.level().dimension() == TEDimKeys.BTD) return;
+        if (!(Math.random() < (TEConfig.randomEventChance)/48)) return;
         String[] messages = {
                 "<§kUnknown§r> This isn't real.",
                 "<§kUnknown§r> Wake up.",

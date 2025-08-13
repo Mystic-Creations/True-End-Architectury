@@ -9,9 +9,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.core.registries.Registries;
 
 // Import your block classes
-import net.justmili.true_end.block.*;
 
-public class TrueEndBlocks {
+
+public class TEBlocks {
     public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(TrueEndCommon.MOD_ID, Registries.BLOCK);
 
     public static final RegistrySupplier<Block> DIRT = REGISTRY.register("dirt", Dirt::new);

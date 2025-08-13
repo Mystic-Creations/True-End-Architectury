@@ -3,10 +3,10 @@ package net.justmili.true_end.procedures.randomevents;
 import java.util.List;
 
 import net.justmili.true_end.TrueEndCommon;
-import net.justmili.true_end.config.TrueEndConfig;
+import net.justmili.true_end.config.TEConfig;
 import net.justmili.true_end.entity.Unknown;
-import net.justmili.true_end.init.TrueEndEntities;
-import net.justmili.true_end.variables.TrueEndVariables;
+import net.justmili.true_end.init.TEEntities;
+import net.justmili.true_end.variables.TEVariables;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -27,7 +27,7 @@ public class UnknownSpawning {
 
         if (world.getGameTime() % TICK_INTERVAL != 0) return;
         if (world.dimension() == Level.END) return;
-        if (!TrueEndConfig.randomEventsToggle) return;
+        if (!TEConfig.randomEventsToggle) return;
 
         double chanceMultiplier = 0.0;
         Difficulty difficulty = world.getDifficulty();
@@ -41,7 +41,7 @@ public class UnknownSpawning {
             chanceMultiplier = 2.0;
         }
 
-        if (!(Math.random() < (TrueEndConfig.entitySpawnChance * chanceMultiplier))) return;
+        if (!(Math.random() < (TEConfig.entitySpawnChance * chanceMultiplier))) return;
 
         List<ServerPlayer> players = world.players();
         if (players.isEmpty()) return;
@@ -63,7 +63,7 @@ public class UnknownSpawning {
                 continue;
             }
 
-            EntityType<Unknown> type = TrueEndEntities.UNKNOWN.get();
+            EntityType<Unknown> type = TEEntities.UNKNOWN.get();
             Unknown entity = type.create(world);
 
             if (entity == null) return;
@@ -71,7 +71,7 @@ public class UnknownSpawning {
             entity.setPersistenceRequired();
             world.addFreshEntity(entity);
 
-            TrueEndVariables.getLevelData(world).setUnknownInWorld(true);
+            TEVariables.getLevelData(world).setUnknownInWorld(true);
             TrueEndCommon.LOGGER.info("Spawned 'Unknown' at {} on {} after {} attempts.", entity.blockPosition(), groundState, attempt + 1);
             return;
         }

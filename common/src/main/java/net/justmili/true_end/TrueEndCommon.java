@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import dev.architectury.event.events.common.*;
 import net.justmili.true_end.commands.ConfigCmd;
 import net.justmili.true_end.commands.DeveloperCmd;
-import net.justmili.true_end.config.TrueEndConfig;
+import net.justmili.true_end.config.TEConfig;
 import net.justmili.true_end.init.*;
 import net.justmili.true_end.procedures.DimSwapToBTD;
 import net.justmili.true_end.procedures.DimSwapToNWAD;
@@ -43,20 +43,20 @@ public final class TrueEndCommon {
 
         TickEvent.SERVER_POST.register(server -> processQueue());
 
-        TrueEndConfig.setup();
+        TEConfig.setup();
 
-        TrueEndSounds.register();
-        TrueEndBlocks.register();
-        TrueEndItems.register();
-        TrueEndCreativeTab.register();
-        TrueEndParticleTypes.register();
-        TrueEndPoiTypes.register();
-        TrueEndEntities.register();
+        TESounds.register();
+        TEBlocks.register();
+        TEItems.register();
+        TECreativeTabs.register();
+        TEParticleTypes.register();
+        TEPoiTypes.register();
+        TEEntities.register();
 
         DeveloperCmd.register();
         ConfigCmd.register();
 
-        queueServerWork(2, TrueEndFireBlocks::register);
+        queueServerWork(2, TEFireBlocks::register);
 
         registerEvents();
 

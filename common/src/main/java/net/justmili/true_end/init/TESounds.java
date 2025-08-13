@@ -8,7 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 
-public class TrueEndSounds {
+public class TESounds {
     public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(TrueEndCommon.MOD_ID,Registries.SOUND_EVENT);
     private static RegistrySupplier<SoundEvent> sound(String name) {
         return REGISTRY.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(TrueEndCommon.MOD_ID+":"+name)));

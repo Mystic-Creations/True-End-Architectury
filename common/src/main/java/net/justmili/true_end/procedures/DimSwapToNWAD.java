@@ -1,8 +1,7 @@
 package net.justmili.true_end.procedures;
 
 import dev.architectury.event.EventResult;
-import net.justmili.true_end.config.TrueEndConfig;
-import net.justmili.true_end.variables.TrueEndVariables;
+import net.justmili.true_end.config.TEConfig;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.core.BlockPos;
@@ -16,7 +15,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
@@ -25,8 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static net.justmili.true_end.init.TrueEndDimKeys.BTD;
-import static net.justmili.true_end.init.TrueEndDimKeys.NWAD;
+import static net.justmili.true_end.init.TEDimKeys.BTD;
+import static net.justmili.true_end.init.TEDimKeys.NWAD;
 
 public class DimSwapToNWAD {
     private static final Map<UUID, ResourceKey<Level>> diedIn = new HashMap<>();
@@ -38,7 +36,7 @@ public class DimSwapToNWAD {
         if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
         player.sendSystemMessage(Component.literal("skbidi"));
         if (!source.is(DamageTypes.IN_WALL) || !source.is(DamageTypes.FELL_OUT_OF_WORLD)) return EventResult.pass();
-        if (Math.random() < TrueEndConfig.randomEventChance * 2) return EventResult.pass();
+        if (Math.random() < TEConfig.randomEventChance * 2) return EventResult.pass();
 
         Advancement adv = player.server.getAdvancements()
                 .getAdvancement(new ResourceLocation("true_end:leave_the_nightmare_within_a_dream"));

@@ -1,6 +1,6 @@
 package net.justmili.true_end.block;
 
-import net.justmili.true_end.init.TrueEndBlocks;
+import net.justmili.true_end.init.TEBlocks;
 import net.justmili.true_end.procedures.block.GrassBlockLeftClick;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -37,7 +37,7 @@ public class GrassBlock extends Block {
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (!canStayGrass(world, pos)) {
             if (!world.isClientSide()) {
-                world.setBlock(pos, TrueEndBlocks.DIRT.get().defaultBlockState(), 3);
+                world.setBlock(pos, TEBlocks.DIRT.get().defaultBlockState(), 3);
             }
         }
     }
@@ -45,7 +45,7 @@ public class GrassBlock extends Block {
     private static boolean canStayGrass(LevelReader world, BlockPos pos) {
         BlockPos abovePos = pos.above();
         BlockState aboveState = world.getBlockState(abovePos);
-        if (aboveState.is(TrueEndBlocks.LEAVES.get())) {
+        if (aboveState.is(TEBlocks.LEAVES.get())) {
             return true;
         }
         return aboveState.getLightBlock(world, abovePos) <= 0;
@@ -58,7 +58,7 @@ public class GrassBlock extends Block {
 		int y = pos.getY();
 		int z = pos.getZ();
         if (entity.getMainHandItem().is(ItemTags.HOES)) {
-            world.setBlock(BlockPos.containing(x, y, z), TrueEndBlocks.FARMLAND.get().defaultBlockState(), 3);
+            world.setBlock(BlockPos.containing(x, y, z), TEBlocks.FARMLAND.get().defaultBlockState(), 3);
             if (world.isClientSide()) {
                 world.playLocalSound(x, y, z, SoundEvent.createVariableRangeEvent(new ResourceLocation("item.hoe.till")), SoundSource.BLOCKS, 1, 1, false);
             } else {

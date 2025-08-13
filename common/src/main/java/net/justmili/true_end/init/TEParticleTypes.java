@@ -10,7 +10,7 @@ import net.justmili.true_end.TrueEndCommon;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 
-public class TrueEndParticleTypes {
+public class TEParticleTypes {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(TrueEndCommon.MOD_ID, Registries.PARTICLE_TYPE);
 
     public static final RegistrySupplier<SimpleParticleType> DREAM_PORTAL_PARTICLE =

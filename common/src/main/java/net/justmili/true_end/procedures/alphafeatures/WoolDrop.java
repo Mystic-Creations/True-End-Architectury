@@ -12,9 +12,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-import java.awt.*;
-
-import static net.justmili.true_end.init.TrueEndDimKeys.BTD;
+import static net.justmili.true_end.init.TEDimKeys.BTD;
 
 public class WoolDrop {
     public static EventResult onEntityAttacked(LivingEntity entity, DamageSource source, float amount) {
