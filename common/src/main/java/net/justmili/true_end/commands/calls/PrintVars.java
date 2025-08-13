@@ -51,5 +51,6 @@ public class PrintVars {
         source.sendSystemMessage(Component.literal("daytimeChangeToggle: " + TEConfig.daytimeChangeToggle));
         source.sendSystemMessage(Component.literal("clearDreamItems: " + TEConfig.daytimeChangeToggle));
         source.sendSystemMessage(Component.literal("flashingLights: " + TEConfig.flashingLights));
+        source.sendSystemMessage(Component.literal("nostalgicTweaksCompatability: "+ TEConfig.nostalgicTweaksCompatability));
     }
 }
