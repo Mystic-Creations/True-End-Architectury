@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class TrueEndClientForge {
 
     @SubscribeEvent
@@ -18,7 +18,7 @@ public class TrueEndClientForge {
 
 
         TrueEndForge.EVENT_BUS.addListener(EntityRenderers::registerEntityRenderers);
-        TrueEndCommonClient.init();
+        event.enqueueWork(TrueEndCommonClient::init);
     }
 
 }

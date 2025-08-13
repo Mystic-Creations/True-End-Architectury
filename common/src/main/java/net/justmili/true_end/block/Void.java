@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -45,16 +46,14 @@ public class Void extends Block {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(TYPE);
     }
- /*
+
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+    public @NotNull ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
         ItemStack stack = new ItemStack(this);
         CompoundTag bst = stack.getOrCreateTagElement("BlockStateTag");
         bst.putString("type", state.getValue(TYPE).getSerializedName());
         return stack;
     }
-
-  */
 
     @Override
     public void appendHoverText(ItemStack stack, BlockGetter world, List<Component> tooltip, TooltipFlag flag) {

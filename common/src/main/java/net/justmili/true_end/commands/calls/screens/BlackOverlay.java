@@ -1,7 +1,12 @@
 
-package net.justmili.true_end.client.screens;
+package net.justmili.true_end.commands.calls.screens;
 
-import net.justmili.true_end.client.TEScreens;
+import dev.architectury.registry.menu.ExtendedMenuProvider;
+import dev.architectury.registry.menu.MenuRegistry;
+import io.netty.buffer.ByteBufAllocator;
+import net.justmili.true_end.init.TEScreens;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
@@ -29,18 +34,10 @@ public class BlackOverlay extends AbstractContainerMenu implements Supplier<Map<
     private final BlockEntity boundBlockEntity = null;
 
     public BlackOverlay(int id, Inventory inv, FriendlyByteBuf extraData) {
-        super(TEScreen.BLACK_SCREEN.get(), id);
+        super(TEScreens.BLACK_SCREEN.get(), id);
         this.entity = inv.player;
         this.world = inv.player.level();
-        new ItemStackHandler(0);
         BlockPos pos;
-        if (extraData != null) {
-            pos = extraData.readBlockPos();
-            this.x = pos.getX();
-            this.y = pos.getY();
-            this.z = pos.getZ();
-            access = ContainerLevelAccess.create(world, pos);
-        }
     }
 
     @Override
@@ -64,5 +61,27 @@ public class BlackOverlay extends AbstractContainerMenu implements Supplier<Map<
 
     public Map<Integer, Slot> get() {
         return customSlots;
+    }
+
+    public static void call(ServerPlayer player) {
+        MenuRegistry.openExtendedMenu(player, new ExtendedMenuProvider() {
+            @Override
+            public void saveExtraData(FriendlyByteBuf buf) {
+
+            }
+
+            @Override
+            public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+                var buf = new FriendlyByteBuf(ByteBufAllocator.DEFAULT.buffer());
+                saveExtraData(buf);
+                return new BlackOverlay(id, inventory, buf);
+            }
+
+
+            @Override
+            public Component getDisplayName() {
+                return Component.literal("black screen");
+            }
+        });
     }
 }

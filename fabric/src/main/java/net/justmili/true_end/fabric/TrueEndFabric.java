@@ -1,5 +1,6 @@
 package net.justmili.true_end.fabric;
 
+import dev.architectury.event.events.common.LifecycleEvent;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.justmili.true_end.TrueEndCommon;
@@ -21,11 +22,12 @@ public final class TrueEndFabric implements ModInitializer, TerraBlenderApi {
 
         // Run our common setup.
         TrueEndCommon.init();
+
     }
     @Override
     public void onTerraBlenderInitialized()
     {
+        TrueEndCommon.LOGGER.info("TERRABLENDER");
         Regions.register(new SeepingForestRegion(new ResourceLocation("true_end:overworld_region"), 1));
-
     }
 }

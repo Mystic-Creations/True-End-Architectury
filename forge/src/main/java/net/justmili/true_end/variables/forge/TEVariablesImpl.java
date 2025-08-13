@@ -4,7 +4,6 @@ import net.justmili.true_end.variables.WorldData;
 import net.justmili.true_end.variables.PlayerData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class TrueEndVariablesImpl {
+public class TEVariablesImpl {
 
     public static PlayerData getPlayerData(ServerPlayer player) {
 

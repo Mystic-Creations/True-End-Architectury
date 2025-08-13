@@ -21,10 +21,7 @@ import net.justmili.true_end.procedures.events.ChatReplies;
 import net.justmili.true_end.procedures.events.FoodLvlReset;
 import net.justmili.true_end.procedures.events.NoBtdEscape;
 import net.justmili.true_end.procedures.events.NoVoidDamage;
-import net.justmili.true_end.procedures.randomevents.MobStare;
-import net.justmili.true_end.procedures.randomevents.SoundPlayer;
-import net.justmili.true_end.procedures.randomevents.TimeChange;
-import net.justmili.true_end.procedures.randomevents.UnknownSpawning;
+import net.justmili.true_end.procedures.randomevents.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
@@ -52,6 +49,7 @@ public final class TrueEndCommon {
         TEParticleTypes.register();
         TEPoiTypes.register();
         TEEntities.register();
+        TEScreens.register();
 
         DeveloperCmd.register();
         ConfigCmd.register();
@@ -71,6 +69,7 @@ public final class TrueEndCommon {
         TickEvent.PLAYER_POST.register(NoSprint::onPlayerTick);
         TickEvent.PLAYER_POST.register(NotAlone::onPlayerTick);
         TickEvent.PLAYER_POST.register(OnARailTracker::onPlayerTick);
+        TickEvent.PLAYER_POST.register(BlackScreenSeepingReality::onPlayerTick);
 
         ChatEvent.RECEIVED.register(ChatReplies::onChat);
 

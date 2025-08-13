@@ -1,5 +1,6 @@
-package net.justmili.true_end.client.screens;
+package net.justmili.true_end.client.renderer;
 
+import net.justmili.true_end.commands.calls.screens.FunnyScreen;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
@@ -8,15 +9,15 @@ import net.minecraft.client.gui.GuiGraphics;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-public class BlackOverlayRenderer extends AbstractContainerScreen<BlackOverlay> {
+public class FunnyScreenRenderer extends AbstractContainerScreen<FunnyScreen> {
 
-    public BlackOverlayRenderer(BlackOverlay container, Inventory inventory, Component text) {
+    public FunnyScreenRenderer(FunnyScreen container, Inventory inventory, Component text) {
         super(container, inventory, text);
     }
 
     @Override
     public boolean isPauseScreen() {
-        return false;
+        return true;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class BlackOverlayRenderer extends AbstractContainerScreen<BlackOverlay> 
         pose.scale(scaleX, scaleY, 1f);
 
         guiGraphics.blit(
-                new ResourceLocation("true_end:textures/screens/black_screen.png"),
+                new ResourceLocation("true_end:textures/screens/funny.png"),
                 0, 0,
                 0, 0,
                 texW, texH,

@@ -2,9 +2,13 @@ package net.justmili.true_end.commands;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import dev.architectury.event.events.common.CommandRegistrationEvent;
+import net.justmili.true_end.TrueEndCommon;
 import net.justmili.true_end.commands.calls.BTDTest;
 import net.justmili.true_end.commands.calls.PrintVars;
+import net.justmili.true_end.commands.calls.screens.BlackOverlay;
+import net.justmili.true_end.commands.calls.screens.FunnyScreen;
 import net.justmili.true_end.commands.calls.screentests.TestCredits;
+import net.justmili.true_end.init.TEScreens;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,23 +33,18 @@ public class DeveloperCmd {
                             return 0;
                         }))
                         .then(Commands.literal("funny").executes(arguments -> {
-                            Level world = arguments.getSource().getLevel();
-                            double x = arguments.getSource().getPosition().x();
-                            double y = arguments.getSource().getPosition().y();
-                            double z = arguments.getSource().getPosition().z();
-                            Entity entity = arguments.getSource().getEntity();
+                            ServerPlayer player = arguments.getSource().getPlayer();
 
-                            //TestFunny.execute(world, x, y, z, entity);
+                            FunnyScreen.call(player);
                             return 0;
                         }))
                         .then(Commands.literal("black").executes(arguments -> {
-                            Level world = arguments.getSource().getLevel();
-                            double x = arguments.getSource().getPosition().x();
-                            double y = arguments.getSource().getPosition().y();
-                            double z = arguments.getSource().getPosition().z();
-                            Entity entity = arguments.getSource().getEntity();
-
-                            //TestBlackOverlay.execute(world, x, y, z, entity);
+                            ServerPlayer player = arguments.getSource().getPlayer();
+                            try {
+                                BlackOverlay.call(player);
+                            } catch (Exception e) {
+                                TrueEndCommon.LOGGER.error("Failed to open black screen!", e);
+                            }
                             return 0;
                         }))
                 )

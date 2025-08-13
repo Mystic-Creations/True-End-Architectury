@@ -30,6 +30,9 @@ public class PrintVars {
             source.sendSystemMessage(
                     Component.literal("beenBeyond (" + otherPlayer.getName().getString() + "): " + vars.getBeenBeyond())
             );
+            source.sendSystemMessage(
+                    Component.literal("seepingRealityTime (" + otherPlayer.getName().getString() + "): " + vars.getSeepingRealityTime())
+            );
         }
 
         // World vars
