@@ -17,10 +17,13 @@ import java.util.Random;
 public class ChatReplies {
     //Detection & Util
     public static EventResult onChat(ServerPlayer player, Component component) {
-        String msg = component.getString().toLowerCase(Locale.ROOT).trim().replaceAll("[!?.-]+$", "");
         LevelAccessor world = player.serverLevel();
 
-        hardcodedReplies(world, msg, player);
+        MinecraftServer server = player.getServer();
+        if (server != null) server.execute(() -> {
+            String msg = component.getString().toLowerCase(Locale.ROOT).trim().replaceAll("[!?.-]+$", "");
+            hardcodedReplies(world, msg, player);
+        });
 
         return EventResult.pass();
     }

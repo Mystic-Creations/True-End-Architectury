@@ -76,7 +76,7 @@ public class DimSwapToBTD {
                         player.connection.send(new ClientboundPlayerAbilitiesPacket(player.getAbilities()));
                         for (MobEffectInstance effect : player.getActiveEffects()) player.connection.send(new ClientboundUpdateMobEffectPacket(player.getId(), effect));
                         sendFirstEntryConversation(player);
-                        executeCommand(nextLevel, player, "function true_end:btd_global_spawn");
+                        executeCommand(nextLevel, player, "function true_end:spawn/global_spawn");
                         TEVariables.getPlayerData(player).setBeenBeyond(true);
                         HAS_PROCESSED.remove(player);
                         PlayerInvManager.saveInvBTD(player);
@@ -125,10 +125,10 @@ public class DimSwapToBTD {
                         for (MobEffectInstance effect : player.getActiveEffects()) player.connection.send(new ClientboundUpdateMobEffectPacket(player.getId(), effect));
 
                         TrueEndCommon.queueServerWork(4, () -> {
-                            if (absoluteFallbackPlatform) executeCommand(nextLevel, player, "function true_end:clean_farlands_spawn");
+                            if (absoluteFallbackPlatform) executeCommand(nextLevel, player, "function true_end:spawn/farlands_spawn");
                             if (adaptTerrain) adaptTerrain(nextLevel, player.blockPosition());
                             removeNearbyTrees(nextLevel, player.blockPosition(), 15);
-                            executeCommand(nextLevel, player, "function true_end:build_home");
+                            executeCommand(nextLevel, player, "function true_end:home/build_home");
                             setGlobalSpawn(nextLevel, player);
                             sendFirstEntryConversation(player);
                             TEVariables.getPlayerData(player).setBeenBeyond(true);
