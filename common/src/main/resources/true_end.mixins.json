@@ -6,11 +6,11 @@
   "client": [
   ],
   "mixins": [
+    "Farlands",
     "FireBlockAccessor",
     "PlayerSleepMixin",
     "PlayerWakeUpMixin",
-    "SheepEatTrueEndGrassMixin",
-    "TrueEndMixin"
+    "SheepEatTrueEndGrassMixin"
   ],
   "injectors": {
     "defaultRequire": 1

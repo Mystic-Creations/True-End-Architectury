@@ -36,8 +36,6 @@ public final class TrueEndCommon {
     public static final String MOD_ID = "true_end";
 
     public static void init() {
-        // Write common init code here.
-
         TickEvent.SERVER_POST.register(server -> processQueue());
 
         TEConfig.setup();

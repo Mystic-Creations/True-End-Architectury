@@ -10,12 +10,11 @@ import net.minecraft.world.entity.player.Player;
 import static net.justmili.true_end.init.TEDimKeys.BTD;
 
 public class NotAlone {
-
     public static void onPlayerTick(Player player) {
         if (player == null) return;
         if (!((player.level().dimension()) == BTD)) return;
         if (!TEConfig.randomEventsToggle) return;
-        if (!(Math.random() < TEConfig.randomEventChance / 2)) return;
+        if (!(Math.random() < TEConfig.randomEventChance / 24)) return;
         if (player instanceof ServerPlayer serverPlayer) {
             Advancement advancement = serverPlayer.server.getAdvancements().getAdvancement(new ResourceLocation("true_end:not_alone"));
             AdvancementProgress progress = serverPlayer.getAdvancements().getOrStartProgress(advancement);

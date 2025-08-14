@@ -125,7 +125,7 @@ public class DimSwapToBTD {
                         for (MobEffectInstance effect : player.getActiveEffects()) player.connection.send(new ClientboundUpdateMobEffectPacket(player.getId(), effect));
 
                         TrueEndCommon.queueServerWork(4, () -> {
-                            if (absoluteFallbackPlatform) executeCommand(nextLevel, player, "fill ~-12 ~-1 12550821 ~12 ~-1 ~4 true_end:cobblestone replace air");
+                            if (absoluteFallbackPlatform) executeCommand(nextLevel, player, "function true_end:clean_farlands_spawn");
                             if (adaptTerrain) adaptTerrain(nextLevel, player.blockPosition());
                             removeNearbyTrees(nextLevel, player.blockPosition(), 15);
                             executeCommand(nextLevel, player, "function true_end:build_home");
