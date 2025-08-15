@@ -2,15 +2,19 @@ package net.justmili.true_end.commands;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import dev.architectury.event.events.common.CommandRegistrationEvent;
+import dev.architectury.networking.NetworkManager;
+import io.netty.buffer.Unpooled;
 import net.justmili.true_end.TrueEndCommon;
 import net.justmili.true_end.commands.calls.BTDTest;
 import net.justmili.true_end.commands.calls.PrintVars;
 import net.justmili.true_end.commands.calls.screens.BlackOverlay;
 import net.justmili.true_end.commands.calls.screens.FunnyScreen;
 import net.justmili.true_end.commands.calls.screentests.TestCredits;
+import net.justmili.true_end.init.TEPackets;
 import net.justmili.true_end.init.TEScreens;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -26,10 +30,11 @@ public class DeveloperCmd {
         return Commands.literal("trueend").requires(s -> s.hasPermission(4))
                 .then(Commands.literal("testScreen")
                         .then(Commands.literal("credits").executes(arguments -> {
-                            double x = arguments.getSource().getPosition().x();
-                            double y = arguments.getSource().getPosition().y();
-                            double z = arguments.getSource().getPosition().z();
-                            TestCredits.execute(x, y, z);
+                            ServerPlayer player = arguments.getSource().getPlayerOrException();
+
+                            FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+                            NetworkManager.sendToPlayer(player, TEPackets.SHOW_CREDITS_PACKET, buf);
+
                             return 0;
                         }))
                         .then(Commands.literal("funny").executes(arguments -> {

@@ -17,10 +17,7 @@ import net.justmili.true_end.procedures.alphafeatures.AlphaFoodSystem;
 import net.justmili.true_end.procedures.alphafeatures.NoCooldown;
 import net.justmili.true_end.procedures.alphafeatures.NoSprint;
 import net.justmili.true_end.procedures.alphafeatures.WoolDrop;
-import net.justmili.true_end.procedures.events.ChatReplies;
-import net.justmili.true_end.procedures.events.FoodLvlReset;
-import net.justmili.true_end.procedures.events.NoBtdEscape;
-import net.justmili.true_end.procedures.events.NoVoidDamage;
+import net.justmili.true_end.procedures.events.*;
 import net.justmili.true_end.procedures.randomevents.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -48,6 +45,7 @@ public final class TrueEndCommon {
         TEPoiTypes.register();
         TEEntities.register();
         TEScreens.register();
+        TEPackets.registerServer();
 
         DeveloperCmd.register();
         ConfigCmd.register();
@@ -74,6 +72,7 @@ public final class TrueEndCommon {
         PlayerEvent.CHANGE_DIMENSION.register(FoodLvlReset::onChangeDimension);
         PlayerEvent.CHANGE_DIMENSION.register(NoCooldown::onPlayerChangedDimension);
         PlayerEvent.CHANGE_DIMENSION.register(PlayerInvManager::onDimensionChange);
+        PlayerEvent.CHANGE_DIMENSION.register(PlayCredits::onDimensionChange);
         PlayerEvent.PLAYER_RESPAWN.register(NoBtdEscape::onPlayerRespawn);
         PlayerEvent.PLAYER_RESPAWN.register(NoCooldown::onPlayerRespawn);
         PlayerEvent.PLAYER_RESPAWN.register(DimSwapToNWAD::onPlayerRespawn);

@@ -12,6 +12,7 @@ import net.justmili.true_end.client.renderer.FunnyScreenRenderer;
 import net.justmili.true_end.client.renderer.UnknownEntityRenderer;
 import net.justmili.true_end.init.TEBlocks;
 import net.justmili.true_end.init.TEEntities;
+import net.justmili.true_end.init.TEPackets;
 import net.justmili.true_end.init.TEScreens;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.CompoundTag;
@@ -43,5 +44,7 @@ public final class TrueEndCommonClient {
 
         MenuRegistry.registerScreenFactory(TEScreens.BLACK_SCREEN.get(), BlackOverlayRenderer::new);
         MenuRegistry.registerScreenFactory(TEScreens.FUNNY_SCREEN.get(), FunnyScreenRenderer::new);
+
+        TEPackets.registerClient();
     }
 }
