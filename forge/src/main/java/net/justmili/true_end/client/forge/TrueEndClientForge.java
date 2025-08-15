@@ -1,6 +1,7 @@
 package net.justmili.true_end.client.forge;
 
 import net.justmili.true_end.client.TrueEndCommonClient;
+import net.justmili.true_end.client.init.TEParticles;
 import net.justmili.true_end.forge.TrueEndForge;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -16,6 +17,7 @@ public class TrueEndClientForge {
     public static void init(FMLClientSetupEvent event) {
 
         TrueEndForge.EVENT_BUS.addListener(EntityRenderers::registerEntityRenderers);
+        TEParticles.register();
         event.enqueueWork(TrueEndCommonClient::init);
     }
 

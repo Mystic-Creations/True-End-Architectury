@@ -22,7 +22,6 @@ import javax.annotation.Nullable;
 public class TEVariablesImpl {
 
     public static PlayerData getPlayerData(ServerPlayer player) {
-        TrueEndCommon.LOGGER.info("Getting player data for " + player.getName());
         return player.getCapability(PLAYER_VARS_CAP).orElse(new PlayerData());
     }
 

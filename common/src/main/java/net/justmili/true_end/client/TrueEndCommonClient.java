@@ -1,12 +1,10 @@
 package net.justmili.true_end.client;
 
-import dev.architectury.event.events.client.ClientLifecycleEvent;
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
 import dev.architectury.registry.menu.MenuRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.justmili.true_end.client.init.TrueEndParticles;
 import net.justmili.true_end.client.renderer.BlackOverlayRenderer;
 import net.justmili.true_end.client.renderer.FunnyScreenRenderer;
 import net.justmili.true_end.client.renderer.UnknownEntityRenderer;
@@ -14,7 +12,6 @@ import net.justmili.true_end.init.TEBlocks;
 import net.justmili.true_end.init.TEEntities;
 import net.justmili.true_end.init.TEPackets;
 import net.justmili.true_end.init.TEScreens;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 
@@ -22,8 +19,6 @@ import net.minecraft.resources.ResourceLocation;
 public final class TrueEndCommonClient {
 
     public static void init() {
-
-        TrueEndParticles.register();
 
         EntityRendererRegistry.register(
                 TEEntities.UNKNOWN,

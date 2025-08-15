@@ -1,11 +1,10 @@
 package net.justmili.true_end.client.fabric;
 
-import dev.architectury.registry.menu.MenuRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.justmili.true_end.client.TrueEndCommonClient;
-import net.justmili.true_end.client.renderer.BlackOverlayRenderer;
+import net.justmili.true_end.client.init.TEParticles;
 import net.justmili.true_end.client.renderer.UnknownEntityRenderer;
 import net.justmili.true_end.init.TEBlocks;
 import net.justmili.true_end.init.TEEntities;
@@ -26,5 +25,7 @@ public class TrueEndFabricClient implements ClientModInitializer {
         EntityRendererRegistry.register(TEEntities.UNKNOWN.get(), UnknownEntityRenderer.UnknownRenderer::new);
 
         TrueEndCommonClient.init();
+
+        TEParticles.register();
     }
 }
