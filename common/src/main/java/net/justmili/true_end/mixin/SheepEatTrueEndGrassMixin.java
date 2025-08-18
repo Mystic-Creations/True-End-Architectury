@@ -24,11 +24,7 @@ public class SheepEatTrueEndGrassMixin {
 
     @Shadow @Final private Mob mob;
 
-    @Shadow @Final private static Predicate<BlockState> IS_TALL_GRASS;
-
     @Shadow @Final private Level level;
-
-    @Shadow private int eatAnimationTick;
 
     @ModifyReturnValue(
             method = "canUse",

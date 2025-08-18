@@ -31,7 +31,6 @@ dependencies {
 
     modImplementation "dev.architectury:architectury-fabric:$rootProject.architectury_api_version"
 
-
     modImplementation "com.github.glitchfiend:TerraBlender-fabric:1.20.1-3.0.1.10"
 
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.5.0"))
