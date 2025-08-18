@@ -4,6 +4,7 @@ import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import dev.architectury.event.events.common.CommandRegistrationEvent;
+import net.justmili.true_end.config.ConfigSync;
 import net.justmili.true_end.config.TEConfig;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -45,9 +46,16 @@ public class ConfigCmd {
                         .then(Commands.literal("fogToggle")
                                 .executes(ctx -> getConfig(ctx.getSource(), "fogToggle", TEConfig.fogToggle))
                                 .then(Commands.literal("true")
-                                        .executes(ctx -> handleBoolean(ctx.getSource(), "fogToggle", true)))
+                                        .executes(ctx -> {
+                                            handleBoolean(ctx.getSource(), "fogToggle", true);
+                                            ConfigSync.sendFogToggleAll(ctx.getSource().getServer());
+                                            return 0;
+                                        }))
                                 .then(Commands.literal("false")
-                                        .executes(ctx -> handleBoolean(ctx.getSource(), "fogToggle", false))))
+                                        .executes(ctx -> {handleBoolean(ctx.getSource(), "fogToggle", false);
+                                            ConfigSync.sendFogToggleAll(ctx.getSource().getServer());
+                                            return 0;
+                                        })))
 
                         .then(Commands.literal("popupsToggle")
                                 .executes(ctx -> getConfig(ctx.getSource(), "popupsToggle", TEConfig.popupsToggle))

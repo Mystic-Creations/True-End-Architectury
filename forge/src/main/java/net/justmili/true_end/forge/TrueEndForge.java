@@ -18,7 +18,7 @@ import static org.antlr.runtime.debug.DebugEventListener.PROTOCOL_VERSION;
 @Mod(TrueEndCommon.MOD_ID)
 public final class TrueEndForge {
     public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(
-            ResourceLocation.parse(TrueEndCommon.MOD_ID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
+            new ResourceLocation(TrueEndCommon.MOD_ID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals);
 
     public static IEventBus EVENT_BUS;
@@ -36,7 +36,7 @@ public final class TrueEndForge {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            Regions.register(new SeepingForestRegion(ResourceLocation.parse("true_end:overworld_region"), 1));
+            Regions.register(new SeepingForestRegion(new ResourceLocation("true_end:overworld_region"), 1));
         });
     }
 }

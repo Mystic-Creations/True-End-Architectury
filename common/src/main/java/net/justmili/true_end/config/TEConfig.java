@@ -26,6 +26,8 @@ public class TEConfig {
     public static boolean clearDreamItems = true;
     public static boolean nostalgicTweaksCompatability = true;
 
+    public static boolean fogToggleClient;
+
     public static void setup() {
         Map<String, Object> entries = TEConfig.serializer.deserialize();
         entries = entries == null ? new HashMap<>() : entries;

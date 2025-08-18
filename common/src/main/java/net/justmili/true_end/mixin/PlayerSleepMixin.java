@@ -2,7 +2,6 @@ package net.justmili.true_end.mixin;
 
 import net.justmili.true_end.procedures.randomevents.SleepPopup;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;

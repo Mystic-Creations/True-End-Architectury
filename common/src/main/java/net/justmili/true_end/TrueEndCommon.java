@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import dev.architectury.event.events.common.*;
 import net.justmili.true_end.commands.ConfigCmd;
 import net.justmili.true_end.commands.DeveloperCmd;
+import net.justmili.true_end.config.ConfigSync;
 import net.justmili.true_end.config.TEConfig;
 import net.justmili.true_end.init.*;
 import net.justmili.true_end.procedures.DimSwapToBTD;
@@ -17,6 +18,7 @@ import net.justmili.true_end.procedures.alphafeatures.AlphaFoodSystem;
 import net.justmili.true_end.procedures.alphafeatures.NoCooldown;
 import net.justmili.true_end.procedures.alphafeatures.NoSprint;
 import net.justmili.true_end.procedures.alphafeatures.WoolDrop;
+import net.justmili.true_end.procedures.compatibility.NostalgicTweaksCompatibiliy;
 import net.justmili.true_end.procedures.events.*;
 import net.justmili.true_end.procedures.randomevents.*;
 import net.minecraft.network.chat.Component;
@@ -66,6 +68,7 @@ public final class TrueEndCommon {
         TickEvent.PLAYER_POST.register(NotAlone::onPlayerTick);
         TickEvent.PLAYER_POST.register(OnARailTracker::onPlayerTick);
         TickEvent.PLAYER_POST.register(BlackScreenSeepingReality::onPlayerTick);
+        TickEvent.PLAYER_POST.register(NostalgicTweaksCompatibiliy::onPlayerTick);
 
         ChatEvent.RECEIVED.register(ChatReplies::onChat);
 
@@ -73,11 +76,17 @@ public final class TrueEndCommon {
         PlayerEvent.CHANGE_DIMENSION.register(NoCooldown::onPlayerChangedDimension);
         PlayerEvent.CHANGE_DIMENSION.register(PlayerInvManager::onDimensionChange);
         PlayerEvent.CHANGE_DIMENSION.register(PlayCredits::onDimensionChange);
+        PlayerEvent.CHANGE_DIMENSION.register((player, to, from) -> {
+            ConfigSync.sendFogToggle(player);
+        });
         PlayerEvent.PLAYER_RESPAWN.register(NoBtdEscape::onPlayerRespawn);
         PlayerEvent.PLAYER_RESPAWN.register(NoCooldown::onPlayerRespawn);
         PlayerEvent.PLAYER_RESPAWN.register(DimSwapToNWAD::onPlayerRespawn);
+        PlayerEvent.PLAYER_RESPAWN.register((player, bool) -> {
+            ConfigSync.sendFogToggle(player);
+        });
         PlayerEvent.PLAYER_ADVANCEMENT.register(DimSwapToBTD::onAdvancement);
-
+        PlayerEvent.PLAYER_JOIN.register(ConfigSync::sendFogToggle);
         EntityEvent.LIVING_DEATH.register(NoBtdEscape::onPlayerDeath);
         EntityEvent.LIVING_DEATH.register(WhenPigsFly::onPigFallDeath);
         EntityEvent.LIVING_DEATH.register(DimSwapToNWAD::onPlayerDeath);
