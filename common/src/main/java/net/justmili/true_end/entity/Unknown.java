@@ -32,7 +32,7 @@ public class Unknown extends AmbientCreature {
     private static final int MAX_VISIBLE_TICKS = 60, COOLDOWN_TICKS = 3600;
     private int visibleTicks = 0, existenceTicks = 0;
 
-    private UnknownBehavior behavior = UnknownBehavior.STALKING;
+    public UnknownBehavior behavior = UnknownBehavior.STALKING;
     private static final EntityDataAccessor<String> TEXTURE_NAME = SynchedEntityData.defineId(Unknown.class, EntityDataSerializers.STRING);
 
     public Unknown(EntityType<? extends AmbientCreature> type, Level level) {
@@ -45,7 +45,7 @@ public class Unknown extends AmbientCreature {
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 20)
-                .add(Attributes.MOVEMENT_SPEED, 0.38)
+                .add(Attributes.MOVEMENT_SPEED, 0.4)
                 .add(Attributes.FOLLOW_RANGE, FOLLOW_RANGE)
                 .add(Attributes.ATTACK_DAMAGE, 6);
     }
@@ -63,22 +63,16 @@ public class Unknown extends AmbientCreature {
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        if (tag.contains("doWeeping")) {
-            if (tag.getBoolean("doWeeping")) behavior = UnknownBehavior.WEEPING;
-        } else if (tag.contains("doStalking")) {
-            if (tag.getBoolean("doStalking")) behavior = UnknownBehavior.STALKING;
-        } else if (tag.contains("doAttacking")) {
-            if (tag.getBoolean("doAttacking")) behavior = UnknownBehavior.ATTACKING;
-        } else {
-            behavior = UnknownBehavior.fromString(tag.getString("Behavior"));
-        }
+        behavior = UnknownBehavior.fromString(tag.getString("Behavior"));
+        if (tag.getBoolean("doWeeping")) behavior = UnknownBehavior.WEEPING;
+        if (tag.getBoolean("doStalking")) behavior = UnknownBehavior.STALKING;
+        if (tag.getBoolean("doAttacking")) behavior = UnknownBehavior.ATTACKING;
         setTexture(behavior);
     }
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putString("Behavior", behavior.name());
-        tag.putString("TextureName", getTextureName());
         tag.putBoolean("doWeeping",  behavior == UnknownBehavior.WEEPING);
         tag.putBoolean("doStalking", behavior == UnknownBehavior.STALKING);
         tag.putBoolean("doAttacking",behavior == UnknownBehavior.ATTACKING);
@@ -102,6 +96,7 @@ public class Unknown extends AmbientCreature {
             case STALKING -> doStalking(target);
             case WEEPING -> doWeeping(target);
             case ATTACKING -> doAttacking(target);
+            default -> doStalking(target);
         }
     }
     private static class LookAtNearestPlayerGoal extends Goal {
@@ -172,7 +167,7 @@ public class Unknown extends AmbientCreature {
             case STALKING -> textures = new String[]{ "unknown_0", "unknown_1" };
             case WEEPING -> textures = new String[]{ "unknown_3" };
             case ATTACKING -> textures = new String[]{ "unknown_0", "unknown_2" };
-            default -> textures = new String[]{ "unknown_0" };
+            default -> textures = new String[]{ "unknown_0", "unknown_1" };
         }
         String selected = textures[new Random().nextInt(textures.length)];
         entityData.set(TEXTURE_NAME, selected);

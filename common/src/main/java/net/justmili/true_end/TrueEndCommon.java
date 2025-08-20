@@ -3,6 +3,7 @@ package net.justmili.true_end;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import dev.architectury.event.events.common.*;
+import dev.architectury.platform.Platform;
 import net.justmili.true_end.commands.ConfigCmd;
 import net.justmili.true_end.commands.DeveloperCmd;
 import net.justmili.true_end.config.ConfigSync;
@@ -22,6 +23,7 @@ import net.justmili.true_end.procedures.compatibility.NostalgicTweaksCompatibili
 import net.justmili.true_end.procedures.events.*;
 import net.justmili.true_end.procedures.randomevents.*;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +67,6 @@ public final class TrueEndCommon {
         TickEvent.PLAYER_POST.register(TimeChange::onPlayerTick);
         TickEvent.PLAYER_POST.register(SoundPlayer::onPlayerTick);
         TickEvent.PLAYER_POST.register(NoSprint::onPlayerTick);
-        TickEvent.PLAYER_POST.register(NotAlone::onPlayerTick);
         TickEvent.PLAYER_POST.register(OnARailTracker::onPlayerTick);
         TickEvent.PLAYER_POST.register(BlackScreenSeepingReality::onPlayerTick);
         TickEvent.PLAYER_POST.register(NostalgicTweaksCompatibiliy::onPlayerTick);
@@ -136,5 +137,9 @@ public final class TrueEndCommon {
             });
         }
     }
-
+    public static boolean hasAdvancement(ServerPlayer player, String AdvancementID) {
+        return player.getAdvancements().getOrStartProgress(
+                player.server.getAdvancements().getAdvancement(new ResourceLocation(AdvancementID))
+        ).isDone();
+    }
 }

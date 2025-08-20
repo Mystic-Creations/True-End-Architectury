@@ -10,7 +10,7 @@ public class NoSprint {
         if (Platform.isModLoaded("nostalgic_tweaks") && TEConfig.nostalgicTweaksCompatability) return;
         if (player.level().dimension() == TEDimKeys.BTD) {
             player.getFoodData().setFoodLevel(4);
-            player.getFoodData().setSaturation(20.0F);
+            player.getFoodData().setSaturation(0.0F);
         }
     }
 }

@@ -1,6 +1,7 @@
 package net.justmili.true_end.procedures;
 
 import dev.architectury.event.EventResult;
+import net.justmili.true_end.TrueEndCommon;
 import net.justmili.true_end.config.TEConfig;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
@@ -37,10 +38,7 @@ public class DimSwapToNWAD {
         if (!(source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.FELL_OUT_OF_WORLD))) return EventResult.pass();
         if (Math.random() < TEConfig.randomEventChance * 2) return EventResult.pass();
 
-        Advancement adv = player.server.getAdvancements()
-                .getAdvancement(new ResourceLocation("true_end:leave_the_nightmare_within_a_dream"));
-        boolean hasAdvancement = adv != null && player.getAdvancements().getOrStartProgress(adv).isDone();
-        if (hasAdvancement) return EventResult.pass();
+        if (TrueEndCommon.hasAdvancement(player, "true_end:leave_the_nightmare_within_a_dream")) return EventResult.pass();
 
         PlayerInvManager.saveInvNWAD(player);
         if (!world.isClientSide()) {

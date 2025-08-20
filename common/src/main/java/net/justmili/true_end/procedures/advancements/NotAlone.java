@@ -10,18 +10,16 @@ import net.minecraft.world.entity.player.Player;
 import static net.justmili.true_end.init.TEDimKeys.BTD;
 
 public class NotAlone {
-    public static void onPlayerTick(Player player) {
-        if (player == null) return;
+    public static void grantAdvancement(ServerPlayer player) {
         if (!((player.level().dimension()) == BTD)) return;
         if (!TEConfig.randomEventsToggle) return;
-        if (!(Math.random() < TEConfig.randomEventChance / 24)) return;
-        if (player instanceof ServerPlayer serverPlayer) {
-            Advancement advancement = serverPlayer.server.getAdvancements().getAdvancement(new ResourceLocation("true_end:not_alone"));
-            AdvancementProgress progress = serverPlayer.getAdvancements().getOrStartProgress(advancement);
-            if (!progress.isDone()) {
-                for (String criteria : progress.getRemainingCriteria())
-                    serverPlayer.getAdvancements().award(advancement, criteria);
-            }
+        if (!(Math.random() < TEConfig.randomEventChance)) return;
+
+        Advancement advancement = player.server.getAdvancements().getAdvancement(new ResourceLocation("true_end:not_alone"));
+        AdvancementProgress progress = player.getAdvancements().getOrStartProgress(advancement);
+        if (!progress.isDone()) {
+            for (String criteria : progress.getRemainingCriteria())
+                player.getAdvancements().award(advancement, criteria);
         }
     }
 }

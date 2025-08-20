@@ -6,7 +6,6 @@ import net.justmili.true_end.config.TEConfig;
 import net.justmili.true_end.init.TEPackets;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 
@@ -16,7 +15,7 @@ public class PlayCredits {
     private static boolean hasShownCreditsThisSession = false;
 
     public static void onDimensionChange(ServerPlayer player, ResourceKey<Level> fromWorld, ResourceKey<Level> toWorld) {
-        if (TEConfig.creditsToggle) hasShownCreditsThisSession = false;
+        if (TEConfig.creditsToggle) { hasShownCreditsThisSession = false; } else { return; }
         if (hasShownCreditsThisSession) return;
 
         if (fromWorld == BTD && toWorld == Level.OVERWORLD) {

@@ -6,6 +6,7 @@ import net.justmili.true_end.TrueEndCommon;
 import net.justmili.true_end.config.TEConfig;
 import net.justmili.true_end.entity.Unknown;
 import net.justmili.true_end.init.TEEntities;
+import net.justmili.true_end.procedures.advancements.NotAlone;
 import net.justmili.true_end.variables.TEVariables;
 
 import net.minecraft.core.BlockPos;
@@ -13,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -24,29 +26,27 @@ public class UnknownSpawning {
     private static final int MAX_ATTEMPTS = 16;
 
     public static void onWorldTick(ServerLevel world) {
-
         if (world.getGameTime() % TICK_INTERVAL != 0) return;
         if (world.dimension() == Level.END) return;
-        if (!TEConfig.randomEventsToggle) return;
+        if (!Variables.randomEventsToggle) return;
 
-        double chanceMultiplier = 0.0;
-        Difficulty difficulty = world.getDifficulty();
-        if (difficulty == Difficulty.PEACEFUL) {
-            chanceMultiplier = 3.0; // :)
-        } else if (difficulty == Difficulty.EASY) {
-            chanceMultiplier = 0.5;
-        } else if (difficulty == Difficulty.NORMAL) {
-            chanceMultiplier = 1.0;
-        } else if (difficulty == Difficulty.HARD) {
-            chanceMultiplier = 2.0;
-        }
-
-        if (!(Math.random() < (TEConfig.entitySpawnChance * chanceMultiplier))) return;
+        long daysPlayed = world.getGameTime() / 24000;
+        if (daysPlayed < 10) return;
+        double difficultyMultiplier = switch (world.getDifficulty()) {
+            case PEACEFUL -> 3.0;
+            case EASY -> 0.5;
+            case NORMAL -> 1.0;
+            case HARD -> 2.0;
+        };
+        double spawnChance = Variables.entitySpawnChance * difficultyMultiplier * (daysPlayed - 10);
+        spawnChance = Math.min(spawnChance, 1.0); //cap at 100%
+        if (!(world.random.nextDouble() < (spawnChance))) return;
 
         List<ServerPlayer> players = world.players();
         if (players.isEmpty()) return;
         ServerPlayer player = players.get(world.random.nextInt(players.size()));
         double maxDistance = (world.getServer().getPlayerList().getViewDistance() * 16.0) - 48.0;
+        if (maxDistance <= 32.0) return; //return if render distance too small
 
         for (int attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
             double angle = world.random.nextDouble() * Math.PI * 2.0;
@@ -69,9 +69,11 @@ public class UnknownSpawning {
             if (entity == null) return;
             entity.moveTo(x + 0.5, surfaceY, z + 0.5, world.random.nextFloat() * 360.0F, 0.0F);
             entity.setPersistenceRequired();
+            entity.behavior = Unknown.UnknownBehavior.STALKING;
             world.addFreshEntity(entity);
 
             TEVariables.getLevelData(world).setUnknownInWorld(true);
+            NotAlone.grantAdvancement(player);
             TrueEndCommon.LOGGER.info("Spawned 'Unknown' at {} on {} after {} attempts.", entity.blockPosition(), groundState, attempt + 1);
             return;
         }

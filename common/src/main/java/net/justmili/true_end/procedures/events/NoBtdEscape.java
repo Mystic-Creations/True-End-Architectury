@@ -1,8 +1,10 @@
 package net.justmili.true_end.procedures.events;
 
 import dev.architectury.event.EventResult;
+import net.justmili.true_end.TrueEndCommon;
 import net.justmili.true_end.variables.TEVariables;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -11,6 +13,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 import static net.justmili.true_end.init.TEDimKeys.BTD;
@@ -26,6 +29,11 @@ public class NoBtdEscape {
     }
 
     public static void onPlayerRespawn(ServerPlayer player, boolean b) {
+        boolean leftBtd = player.getAdvancements()
+                .getOrStartProgress(
+                        Objects.requireNonNull(player.server.getAdvancements().getAdvancement(new ResourceLocation("true_end:go_back")))
+                ).isDone();
+        if (leftBtd) return;
 
         UUID uuid = player.getUUID();
         ResourceKey<Level> dim = diedIn.remove(uuid);

@@ -13,20 +13,19 @@ public class TimeChange {
 
     public static void onPlayerTick(Player player) {
         if (!TEConfig.randomEventsToggle) return;
-        if (!(player instanceof ServerPlayer serverPlayer)) return;
+        if (!TEConfig.daytimeChangeToggle) return;
+        if (!(player.level() instanceof ServerLevel serverWorld)) return;
 
-        ServerLevel world = (ServerLevel) player.level();
-
-        long totalDays = world.getDayTime() / 24000;
+        long totalDays = serverWorld.getDayTime() / 24000;
         if (totalDays < 3) return;
         if (totalDays % 4 != 0) return;
-        makeNight(serverPlayer);
-        makeDay(serverPlayer);
+
+        makeNight(serverWorld);
+        makeDay(serverWorld);
     }
 
-    public static void makeNight(ServerPlayer player) {
+    public static void makeNight(ServerLevel world) {
         if (!(Math.random() < (TEConfig.randomEventChance/64))) return;
-        ServerLevel world = (ServerLevel) player.level();
         long time = world.getDayTime() % 24000;
         if (time > DAY && time < NIGHT) {
             long newTime = NIGHT + (long) (Math.random() * (MIDNIGHT - NIGHT));
@@ -35,9 +34,8 @@ public class TimeChange {
         }
     }
 
-    public static void makeDay(ServerPlayer player) {
+    public static void makeDay(ServerLevel world) {
         if (!(Math.random() < (TEConfig.randomEventChance/64))) return;
-        ServerLevel world = (ServerLevel) player.level();
         long time = world.getDayTime() % 24000;
         boolean isNight = time >= MIDNIGHT || time < DAY;
         if (isNight) {
