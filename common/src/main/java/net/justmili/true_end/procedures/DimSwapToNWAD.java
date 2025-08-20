@@ -34,8 +34,7 @@ public class DimSwapToNWAD {
         if (entity.level().dimension() == BTD || entity.level().dimension() == NWAD) return EventResult.pass();
         if (source == null) return EventResult.pass();
         if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
-        player.sendSystemMessage(Component.literal("skbidi"));
-        if (!source.is(DamageTypes.IN_WALL) || !source.is(DamageTypes.FELL_OUT_OF_WORLD)) return EventResult.pass();
+        if (!(source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.FELL_OUT_OF_WORLD))) return EventResult.pass();
         if (Math.random() < TEConfig.randomEventChance * 2) return EventResult.pass();
 
         Advancement adv = player.server.getAdvancements()
