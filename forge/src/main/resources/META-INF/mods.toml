@@ -7,11 +7,11 @@ license = "MIT"
 modId = "true_end"
 version = "${version}"
 displayName = "True End"
-authors = ""
+authors = "Mystic Creations Team"
 description = '''
 
 '''
-#logoFile = ""
+logoFile = "icon.png"
 
 [[dependencies.true_end]]
 modId = "forge"

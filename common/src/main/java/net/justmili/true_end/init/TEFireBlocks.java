@@ -1,7 +1,6 @@
 package net.justmili.true_end.init;
 
 import net.justmili.true_end.registry.ArsonRegistry;
-import net.justmili.true_end.registry.ArsonRegistryReference;
 
 public class TEFireBlocks {
     public static ArsonRegistry REGISTRY = ArsonRegistry.createInstance();

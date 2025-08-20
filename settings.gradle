@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'true_end'
+rootProject.name = 'trueend'
 
 include 'common'
 include 'fabric'
