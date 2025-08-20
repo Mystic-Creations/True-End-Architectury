@@ -13,7 +13,7 @@ public class NostalgicTweaksCompatibiliy {
     public static void onPlayerTick(Player player) {
         // check for client side
         if (!TEConfig.nostalgicTweaksCompatability) return;
-        if (Platform.isForge()) return;
+        if (!Platform.isModLoaded("nostalgic_tweaks")) return;
         if (player.level().dimension() == TEDimKeys.BTD) {
             loadVars();
             justOut = true;

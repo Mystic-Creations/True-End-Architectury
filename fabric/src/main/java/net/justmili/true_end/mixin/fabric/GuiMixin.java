@@ -1,4 +1,4 @@
-package net.justmili.true_end.mixin;
+package net.justmili.true_end.mixin.fabric;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -10,12 +10,10 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.StringUtil;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -49,9 +47,9 @@ public abstract class GuiMixin {
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int moveHeartsDown(int y) {
         if (Platform.isModLoaded("nostalgic_tweaks") && TEConfig.nostalgicTweaksCompatability) {
-            return y - 12;
+            return y +7 ;
         } else {
-            return y + 7;
+            return y -12;
         }
     }
 

@@ -3,6 +3,7 @@ package net.justmili.true_end.mixin;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.justmili.true_end.TrueEndCommon;
 import net.justmili.true_end.init.TEBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;

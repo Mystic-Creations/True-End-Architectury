@@ -7,7 +7,6 @@
     "minVersion": "0.5.0"
   },
   "client": [
-    "GuiMixin",
     "PlayerSleepMixin"
   ],
   "mixins": [
