@@ -28,7 +28,7 @@ public class UnknownSpawning {
     public static void onWorldTick(ServerLevel world) {
         if (world.getGameTime() % TICK_INTERVAL != 0) return;
         if (world.dimension() == Level.END) return;
-        if (!Variables.randomEventsToggle) return;
+        if (!TEConfig.randomEventsToggle) return;
 
         long daysPlayed = world.getGameTime() / 24000;
         if (daysPlayed < 10) return;
@@ -38,7 +38,7 @@ public class UnknownSpawning {
             case NORMAL -> 1.0;
             case HARD -> 2.0;
         };
-        double spawnChance = Variables.entitySpawnChance * difficultyMultiplier * (daysPlayed - 10);
+        double spawnChance = TEConfig.entitySpawnChance * difficultyMultiplier * (daysPlayed - 10);
         spawnChance = Math.min(spawnChance, 1.0); //cap at 100%
         if (!(world.random.nextDouble() < (spawnChance))) return;
 
