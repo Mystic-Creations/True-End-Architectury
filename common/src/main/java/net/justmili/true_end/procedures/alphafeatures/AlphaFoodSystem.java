@@ -26,9 +26,9 @@ public class AlphaFoodSystem {
     private static final TagKey<Item> BTD_UNEATABLES = TagKey.create(BuiltInRegistries.ITEM.key(), tagId);
 
     public static CompoundEventResult<ItemStack> onRightClickItem(Player player, InteractionHand hand) {
+        if (player.level().dimension() != BTD) return CompoundEventResult.pass();
         if (hand != InteractionHand.MAIN_HAND) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         ItemStack stack = player.getItemInHand(hand);
-        if (player.level().dimension() != BTD) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         float newHealth = player.getHealth();
         int consumed;
 
