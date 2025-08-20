@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
@@ -45,48 +46,47 @@ public class Dirt extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState blockstate, Level world, BlockPos pos, Player entity, InteractionHand hand, BlockHitResult hit) {
-        super.use(blockstate, world, pos, entity, hand, hit);
+    public InteractionResult use(BlockState blockstate, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
-        if (entity.getMainHandItem().is(ItemTags.HOES)) {
+        float pitch = 0.9f + world.getRandom().nextFloat() * 0.2f;
+
+        if (player.getMainHandItem().is(ItemTags.HOES)) {
             world.setBlock(BlockPos.containing(x, y, z), TEBlocks.FARMLAND.get().defaultBlockState(), 3);
-            if (world.isClientSide()) {
-                world.playLocalSound(x, y, z, SoundEvent.createVariableRangeEvent(new ResourceLocation("item.hoe.till")), SoundSource.BLOCKS, 1, 1, false);
-            } else {
-                world.playLocalSound(x, y, z, SoundEvent.createVariableRangeEvent(new ResourceLocation("item.hoe.till")), SoundSource.BLOCKS, 1, 1, false);
-            }
+            world.playSound(null, x, y, z, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0f, pitch);
+            player.getMainHandItem().hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.FAIL;
     }
 
-private static boolean canBeGrass(BlockState state, LevelReader world, BlockPos pos) {
-    BlockPos abovePos = pos.above();
-    BlockState aboveState = world.getBlockState(abovePos);
+    private static boolean canBeGrass(BlockState state, LevelReader world, BlockPos pos) {
+        BlockPos abovePos = pos.above();
+        BlockState aboveState = world.getBlockState(abovePos);
 
-    // Check if there's a block above, if so, don't turn into grass.
-    if (!aboveState.isAir()) {
-        return false;
-    }
+        // Check if there's a block above, if so, don't turn into grass.
+        if (!aboveState.isAir()) {
+            return false;
+        }
 
-    // Check for adjacent grass blocks in a 3x3x3 area
-    for (int x = -1; x <= 1; x++) {
-        for (int y = -1; y <= 1; y++) { // Added y loop for vertical check
-            for (int z = -1; z <= 1; z++) {
-                if (x == 0 && y == 0 && z == 0) { // Skip the current block
-                    continue;
-                }
-                BlockPos neighborPos = pos.offset(x, y, z);
-                BlockState neighborState = world.getBlockState(neighborPos);
+        // Check for adjacent grass blocks in a 3x3x3 area
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) { // Added y loop for vertical check
+                for (int z = -1; z <= 1; z++) {
+                    if (x == 0 && y == 0 && z == 0) { // Skip the current block
+                        continue;
+                    }
+                    BlockPos neighborPos = pos.offset(x, y, z);
+                    BlockState neighborState = world.getBlockState(neighborPos);
 
-                if (neighborState.is(TEBlocks.GRASS_BLOCK.get())) {
-                    return true;
+                    if (neighborState.is(TEBlocks.GRASS_BLOCK.get())) {
+                        return true;
+                    }
                 }
             }
         }
+        return false;
     }
-    return false;
-	}
 }
