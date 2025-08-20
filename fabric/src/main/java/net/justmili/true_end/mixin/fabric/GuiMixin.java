@@ -45,9 +45,9 @@ public abstract class GuiMixin {
         }
     }
 
-
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int moveHeartsDown(int y) {
+        if (this.minecraft.player.level().dimension() != TEDimKeys.BTD) {return y;}
         if (Platform.isModLoaded("nostalgic_tweaks") && TEConfig.nostalgicTweaksCompatability) {
             return y +7 ;
         } else {
@@ -72,6 +72,7 @@ public abstract class GuiMixin {
             ordinal = 5     // <-- need to match the correct int local
     )
     private int modifyBubblesY(int original) {
+        if (this.minecraft.player.level().dimension() != TEDimKeys.BTD) {return original;}
         if (Platform.isModLoaded("nostalgic_tweaks")  && TEConfig.nostalgicTweaksCompatability) {
             return original;
         } else {
