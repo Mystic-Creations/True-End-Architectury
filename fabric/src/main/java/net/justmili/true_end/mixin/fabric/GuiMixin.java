@@ -2,9 +2,11 @@ package net.justmili.true_end.mixin.fabric;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.mojang.blaze3d.vertex.PoseStack;
 import dev.architectury.platform.Platform;
 import net.justmili.true_end.config.TEConfig;
 import net.justmili.true_end.init.TEDimKeys;
+import net.justmili.true_end.procedures.randomevents.GlitchVersionOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
@@ -82,11 +84,34 @@ public abstract class GuiMixin {
 
     @Inject(at = @At("HEAD"), method = "render")
     public void render(GuiGraphics guiGraphics, float partialTick, CallbackInfo ci) {
+
+        if (this.minecraft.player.level().dimension() != TEDimKeys.BTD) return;
+
         this.minecraft.getProfiler().push("demo");
-        Component component = Component.literal("what mili wants me to put here");
+        Component component = Component.literal(GlitchVersionOverlay.currentText);
+
+        final int fontSize = 32;
+        float guiScaleFactor = (float) this.minecraft.getWindow().getScreenWidth() / (float) this.minecraft.getWindow().getGuiScaledWidth();
+        float baseFontHeight = (float) this.minecraft.font.lineHeight;
+        float userScale = fontSize / baseFontHeight;
+
+        PoseStack pose = guiGraphics.pose();
+
+        pose.pushPose();
+        pose.scale(1f / guiScaleFactor, 1f / guiScaleFactor, 1f);
+        pose.scale(userScale, userScale, 1f);
 
         int i = this.getFont().width(component);
-        guiGraphics.drawString(this.getFont(), component, 10, 5, 16777215);
+        int x = 6;
+        int y = 6;
+        int textColor = 0xFFFFFF;
+        int textShadowColor = 0xFF3F3F3F;
+        int drawX = Math.round(x / userScale);
+        int drawY = Math.round(y / userScale);
+
+
+        guiGraphics.drawString(minecraft.font, Component.literal(GlitchVersionOverlay.currentText), drawX + 1, drawY + 1, textShadowColor, false);
+        guiGraphics.drawString(minecraft.font, Component.literal(GlitchVersionOverlay.currentText), drawX, drawY, textColor, false);
         this.minecraft.getProfiler().pop();
     }
 
