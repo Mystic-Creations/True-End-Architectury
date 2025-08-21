@@ -13,7 +13,6 @@ import net.justmili.true_end.init.TEBlocks;
 import net.justmili.true_end.init.TEEntities;
 import net.justmili.true_end.init.TEPackets;
 import net.justmili.true_end.init.TEScreens;
-import net.justmili.true_end.procedures.randomevents.GlitchVersionOverlay;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 
@@ -42,7 +41,7 @@ public final class TrueEndCommonClient {
         MenuRegistry.registerScreenFactory(TEScreens.BLACK_SCREEN.get(), BlackOverlayRenderer::new);
         MenuRegistry.registerScreenFactory(TEScreens.FUNNY_SCREEN.get(), FunnyScreenRenderer::new);
 
-        ClientTickEvent.CLIENT_POST.register(GlitchVersionOverlay::onClientTick);
+        ClientTickEvent.CLIENT_POST.register(VersionOverlay::onClientTick);
 
         TEPackets.registerClient();
     }

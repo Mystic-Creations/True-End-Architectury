@@ -228,7 +228,9 @@ public class DimSwapToBTD {
                         || existing.getFluidState().is(FluidTags.WATER)
                         || existing.getFluidState().is(FluidTags.LAVA)
                         || existing.is(TEBlocks.GRASS_BLOCK.get())
-                        || existing.is(TEBlocks.SAND.get())) {
+                        || existing.is(TEBlocks.SAND.get())
+                        || existing.is(TEBlocks.FLOWER.get())
+                        || existing.is(TEBlocks.ROSE.get())) {
 
                     placeGrassWithDirt(world, grassPos);
                 }
@@ -267,7 +269,9 @@ public class DimSwapToBTD {
                         || existing.getFluidState().is(FluidTags.WATER)
                         || existing.getFluidState().is(FluidTags.LAVA)
                         || existing.is(TEBlocks.GRASS_BLOCK.get())
-                        || existing.is(TEBlocks.SAND.get())) {
+                        || existing.is(TEBlocks.SAND.get())
+                        || existing.is(TEBlocks.FLOWER.get())
+                        || existing.is(TEBlocks.ROSE.get())) {
 
                     placeGrassWithDirt(world, grassPos);
                 }
@@ -283,7 +287,9 @@ public class DimSwapToBTD {
                 && !existing.getFluidState().is(FluidTags.WATER)
                 && !existing.getFluidState().is(FluidTags.LAVA)
                 && !existing.is(TEBlocks.GRASS_BLOCK.get())
-                && !existing.is(TEBlocks.SAND.get())) {
+                && !existing.is(TEBlocks.SAND.get())
+                && !existing.is(TEBlocks.FLOWER.get())
+                && !existing.is(TEBlocks.ROSE.get())) {
             return;
         }
         world.setBlock(clampedPos, TEBlocks.GRASS_BLOCK.get().defaultBlockState(), 3);
@@ -298,7 +304,9 @@ public class DimSwapToBTD {
                     && !current.getFluidState().is(FluidTags.LAVA)
                     && !current.is(TEBlocks.GRASS_BLOCK.get())
                     && !current.is(TEBlocks.DIRT.get())
-                    && !current.is(TEBlocks.SAND.get())) {
+                    && !current.is(TEBlocks.SAND.get())
+                    && !current.is(TEBlocks.FLOWER.get())
+                    && !current.is(TEBlocks.ROSE.get())) {
                 break;
             }
             world.setBlock(mutablePos, TEBlocks.DIRT.get().defaultBlockState(), 3);

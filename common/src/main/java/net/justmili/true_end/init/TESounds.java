@@ -17,6 +17,7 @@ public class TESounds {
     public static final RegistrySupplier<SoundEvent> MOD_CREDITS_MUSIC = sound("back_in_the_game");
     public static final RegistrySupplier<SoundEvent> MUSIC_FARLANDS = sound("farlands");
     public static final RegistrySupplier<SoundEvent> MUSIC_NEVER_ALONE = sound("never_alone");
+    public static final RegistrySupplier<SoundEvent> DAISY_BELL = sound("daisy_bell");
 
     public static void register() {
         REGISTRY.register();

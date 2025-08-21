@@ -3,18 +3,14 @@ package net.justmili.true_end.client.gui.forge;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.justmili.true_end.TrueEndCommon;
 import net.justmili.true_end.init.TEDimKeys;
-import net.justmili.true_end.procedures.randomevents.GlitchVersionOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = TrueEndCommon.MOD_ID, value = Dist.CLIENT)
 public class VersionOverlay {
@@ -43,8 +39,8 @@ public class VersionOverlay {
         int drawX = Math.round(x / userScale);
         int drawY = Math.round(y / userScale);
 
-        gui.drawString(mc.font, Component.literal(GlitchVersionOverlay.currentText), drawX + 1, drawY + 1, textShadowColor, false);
-        gui.drawString(mc.font, Component.literal(GlitchVersionOverlay.currentText), drawX, drawY, textColor, false);
+        gui.drawString(mc.font, Component.literal(net.justmili.true_end.client.VersionOverlay.currentText), drawX + 1, drawY + 1, textShadowColor, false);
+        gui.drawString(mc.font, Component.literal(net.justmili.true_end.client.VersionOverlay.currentText), drawX, drawY, textColor, false);
 
         pose.popPose();
     }

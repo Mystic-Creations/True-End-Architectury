@@ -1,13 +1,11 @@
-package net.justmili.true_end.procedures.randomevents;
+package net.justmili.true_end.client;
 
 import net.justmili.true_end.init.TEDimKeys;
 import net.minecraft.client.Minecraft;
 
 import java.util.Random;
 
-public class GlitchVersionOverlay {
-
-
+public class VersionOverlay {
     private static final String BASE_TEXT = "Minecraft Alpha v1.1.2_10";
     private static final String[] VERSIONS = {
             "Minecraft Alpha v1.1.2",
@@ -18,7 +16,6 @@ public class GlitchVersionOverlay {
             "Minecraft Alpha v1.0.7", //Reference to the VoidExp series by mark101 on YT, specifically moonglitch.avi video
             "Minecraft Alpha v1.0.16_02" //Reference to the infamous herobrine screenshot
     };
-
 
     public static String currentText = BASE_TEXT;
     private static int flashTicks = 4;

@@ -9,9 +9,7 @@ import net.justmili.true_end.commands.calls.BTDTest;
 import net.justmili.true_end.commands.calls.PrintVars;
 import net.justmili.true_end.commands.calls.screens.BlackOverlay;
 import net.justmili.true_end.commands.calls.screens.FunnyScreen;
-import net.justmili.true_end.commands.calls.screentests.TestCredits;
 import net.justmili.true_end.init.TEPackets;
-import net.justmili.true_end.init.TEScreens;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.FriendlyByteBuf;
@@ -67,11 +65,6 @@ public class DeveloperCmd {
                     Entity entity = arguments.getSource().getEntity();
 
                     BTDTest.execute(world, entity);
-                    return 0;
-                }))
-                .then(Commands.literal("clearCurios").executes(arguments -> {
-                    ServerPlayer player = arguments.getSource().getPlayer();
-                    //PlayerInvManager.clearCuriosSlots(player); not gonna bother
                     return 0;
                 }));
     }
