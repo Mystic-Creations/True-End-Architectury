@@ -17,7 +17,6 @@ public class MobStare {
     private static final long EVENT_COOLDOWN = 4L * 24000L;
 
     public static void onWorldTick(ServerLevel level) {
-
             long worldTick = level.getGameTime();
             if (worldTick < lastEventTick + EVENT_COOLDOWN) {
                 updateStare(level);

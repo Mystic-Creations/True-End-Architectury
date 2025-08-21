@@ -63,7 +63,7 @@ public final class TrueEndCommon {
     public static void registerEvents() {
 
         TickEvent.SERVER_LEVEL_POST.register(MobStare::onWorldTick);
-        TickEvent.SERVER_LEVEL_POST.register(UnknownSpawning::onWorldTick);
+        TickEvent.PLAYER_POST.register(UnknownSpawning::onPlayerTick);
         TickEvent.PLAYER_POST.register(TimeChange::onPlayerTick);
         TickEvent.PLAYER_POST.register(SoundPlayer::onPlayerTick);
         TickEvent.PLAYER_POST.register(NoSprint::onPlayerTick);
