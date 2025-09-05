@@ -10,6 +10,7 @@ import net.justmili.true_end.client.renderer.BlackOverlayRenderer;
 import net.justmili.true_end.client.renderer.FunnyScreenRenderer;
 import net.justmili.true_end.client.renderer.UnknownEntityRenderer;
 import net.justmili.true_end.init.*;
+import net.justmili.true_end.procedures.advancements.OpenInventoryAdvancement;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -82,6 +83,7 @@ public final class TrueEndCommonClient {
         MenuRegistry.registerScreenFactory(TEScreens.FUNNY_SCREEN.get(), FunnyScreenRenderer::new);
 
         ClientTickEvent.CLIENT_POST.register(VersionOverlay::onClientTick);
+        ClientTickEvent.CLIENT_POST.register(OpenInventoryAdvancement::onClientTick);
 
         TEPackets.registerClient();
     }

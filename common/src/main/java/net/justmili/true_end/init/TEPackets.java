@@ -10,6 +10,7 @@ public class TEPackets {
 
     public static ResourceLocation SHOW_CREDITS_PACKET = new ResourceLocation("true_end:show_credits");
     public static ResourceLocation FOG_TOGGLE =  new ResourceLocation("true_end:fog_toggle");
+    public static ResourceLocation OPEN_INVENTORY_PACKET = new ResourceLocation("true_end:open_inventory");
 
     public static void registerClient() {
 
