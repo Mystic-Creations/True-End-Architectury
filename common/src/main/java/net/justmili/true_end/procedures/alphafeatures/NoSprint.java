@@ -7,7 +7,6 @@ import net.minecraft.world.entity.player.Player;
 
 public class NoSprint {
     public static void onPlayerTick(Player player) {
-        if (Platform.isModLoaded("nostalgic_tweaks") && TEConfig.nostalgicTweaksCompatability) return;
         if (player.level().dimension() == TEDimKeys.BTD) {
             player.getFoodData().setFoodLevel(4);
             player.getFoodData().setSaturation(0.0F);

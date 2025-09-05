@@ -16,12 +16,10 @@ public class NoCooldown {
     private static final AttributeModifier modifier = new AttributeModifier("9b91a426-cc5c-4a08-a0e5-7d00627cb3ef",200.0, AttributeModifier.Operation.ADDITION);
 
     public static void onPlayerChangedDimension(ServerPlayer player, ResourceKey<Level> fromDimension, ResourceKey<Level> toDimension) {
-        if (Platform.isModLoaded("nostalgic_tweaks") && TEConfig.nostalgicTweaksCompatability) return;
         applyCooldown(player, toDimension);
     }
 
     public static void onPlayerRespawn(ServerPlayer player, boolean bl) {
-        if (Platform.isModLoaded("nostalgic_tweaks") && TEConfig.nostalgicTweaksCompatability) return;
         ResourceKey<Level> toDim = ((ServerPlayer) player).getRespawnDimension();
 
         applyCooldown(player, toDim);

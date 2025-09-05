@@ -24,7 +24,6 @@ public class TEConfig {
     public static boolean flashingLights = true;
     public static boolean daytimeChangeToggle = true;
     public static boolean clearDreamItems = true;
-    public static boolean nostalgicTweaksCompatability = true;
 
     public static boolean fogToggleClient;
 
@@ -54,7 +53,6 @@ public class TEConfig {
         flashingLights = (boolean) entries.get("flashingLights");
         daytimeChangeToggle = (boolean) entries.get("daytimeChangeToggle");
         clearDreamItems = (boolean) entries.get("clearDreamItems");
-        nostalgicTweaksCompatability = (boolean) entries.get("nostalgicTweaksCompatability");
 
         TEConfig.entries = entries;
         serializer.serialize(TEConfig.entries);
@@ -76,7 +74,6 @@ public class TEConfig {
             case "daytimeChangeToggle" -> daytimeChangeToggle = (boolean) value;
             case "clearDreamItems" -> clearDreamItems = (boolean) value;
             case "flashingLights" -> flashingLights = (boolean) value;
-            case "nostalgicTweaksCompatability" -> nostalgicTweaksCompatability = (boolean) value;
             default -> TrueEndCommon.LOGGER.warn("updateConfig: unhandled key '{}'", key);
         }
     }
