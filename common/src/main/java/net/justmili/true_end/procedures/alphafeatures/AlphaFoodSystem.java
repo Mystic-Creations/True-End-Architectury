@@ -30,48 +30,44 @@ public class AlphaFoodSystem {
         if (hand != InteractionHand.MAIN_HAND) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         ItemStack stack = player.getItemInHand(hand);
         float newHealth = player.getHealth();
-        int consumed;
+        boolean consumed = false;
 
         if (stack.getItem() == Items.PORKCHOP) {
             newHealth += 1.5F;
-            consumed = 1;
+            consumed = true;
         } else if (stack.getItem() == Items.COOKED_PORKCHOP) {
             newHealth += 4.0F;
-            consumed = 1;
+            consumed = true;
         } else if (stack.getItem() == Items.BEEF) {
             newHealth += 3.0F;
-            consumed = 1;
+            consumed = true;
         } else if (stack.getItem() == Items.COOKED_BEEF) {
             newHealth += 8.0F;
-            consumed = 1;
+            consumed = true;
         } else if (stack.getItem() == Items.MUTTON) {
             newHealth += 2.0F;
-            consumed = 1;
+            consumed = true;
         } else if (stack.getItem() == Items.COOKED_MUTTON) {
             newHealth += 6.0F;
-            consumed = 1;
+            consumed = true;
         } else if (stack.getItem() == Items.CHICKEN) {
             newHealth += 2.0F;
-            consumed = 1;
+            consumed = true;
         } else if (stack.getItem() == Items.COOKED_CHICKEN) {
             newHealth += 6.0F;
-            consumed = 1;
+            consumed = true;
         } else if (stack.getItem() == Items.BREAD) {
             newHealth += 2.5F;
-            consumed = 1;
+            consumed = true;
         } else if (stack.getItem() == Items.APPLE) {
             newHealth += 2.0F;
-            consumed = 1;
+            consumed = true;
         } else if (stack.getItem() == Items.GOLDEN_APPLE) {
             newHealth += 10.0F;
-            consumed = 1;
-        } else if (stack.is(BTD_UNEATABLES)) {
-            consumed = 0;
-        } else {
-            consumed = 2;
+            consumed = true;
         }
 
-        if (consumed == 1) {
+        if (consumed) {
             if (!healthCheck(player)) {
                 stack.shrink(1);
                 player.getInventory().setChanged();
@@ -80,15 +76,9 @@ public class AlphaFoodSystem {
                 playEatSound(player.level(), player.getX(), player.getY(), player.getZ());
 
                 return CompoundEventResult.pass();
-            } else {
-                consumed = 0;
             }
         }
-
-        if (consumed == 0) {
-            return CompoundEventResult.pass();
-        }
-        return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
+        return CompoundEventResult.pass();
     }
     public static EventResult onRightClickBlock(Player player, InteractionHand hand, BlockPos pos, Direction face) {
         if (hand != InteractionHand.MAIN_HAND) return EventResult.pass();
