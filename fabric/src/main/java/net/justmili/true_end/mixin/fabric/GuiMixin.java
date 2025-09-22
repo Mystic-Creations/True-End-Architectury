@@ -48,7 +48,7 @@ public abstract class GuiMixin {
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int moveHeartsDown(int y) {
         if (this.minecraft.player.level().dimension() != TEDimKeys.BTD) {return y;}
-        if (Platform.isModLoaded("nostalgic_tweaks") && TEConfig.nostalgicTweaksCompatability) {
+        if (Platform.isModLoaded("nostalgic_tweaks")) {
             return y +7 ;
         } else {
             return y -12;
@@ -73,7 +73,7 @@ public abstract class GuiMixin {
     )
     private int modifyBubblesY(int original) {
         if (this.minecraft.player.level().dimension() != TEDimKeys.BTD) {return original;}
-        if (Platform.isModLoaded("nostalgic_tweaks")  && TEConfig.nostalgicTweaksCompatability) {
+        if (Platform.isModLoaded("nostalgic_tweaks")) {
             return original;
         } else {
             return original + 20;  // shift it down 20 px, or whatever you want
@@ -95,12 +95,6 @@ public abstract class GuiMixin {
         float guiScaleFactor = (float) this.minecraft.getWindow().getScreenWidth() / (float) this.minecraft.getWindow().getGuiScaledWidth();
         float baseFontHeight = (float) this.minecraft.font.lineHeight;
         float userScale = fontSize / baseFontHeight;
-
-        PoseStack pose = guiGraphics.pose();
-
-        pose.pushPose();
-        pose.scale(1f / guiScaleFactor, 1f / guiScaleFactor, 1f);
-        pose.scale(userScale, userScale, 1f);
 
         int i = this.getFont().width(component);
         int x = 6;
