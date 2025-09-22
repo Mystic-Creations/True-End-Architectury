@@ -16,10 +16,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.justmili.true_end.fabric.TrueEndFabric"
+      "net.mysticcreations.true_end.fabric.TrueEndFabric"
     ],
     "client": [
-      "net.justmili.true_end.client.fabric.TrueEndFabricClient"
+      "net.mysticcreations.true_end.client.fabric.TrueEndFabricClient"
     ]
   },
   "mixins": [

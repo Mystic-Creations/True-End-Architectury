@@ -48,13 +48,9 @@ dependencies {
 
     // Compile against only the API artifact
     compileOnly "top.theillusivec4.curios:curios-forge:${curios_version}:api"
-    // Use the full Curios API jar at runtime
-    runtimeOnly "top.theillusivec4.curios:curios-forge:${curios_version}"
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionForge')
-
-    //runtimeOnly("curse.maven:artifacts-312353:4631664")
 }
 
 processResources {

@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "net.justmili.true_end.mixin",
+  "package": "net.mysticcreations.true_end.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "mixinextras": {
@@ -13,7 +13,9 @@
     "Farlands",
     "FireBlockAccessor",
     "PlayerWakeUpMixin",
-    "SheepEatTrueEndGrassMixin"
+    "SheepEatTrueEndGrassMixin",
+    "StopSprintingInBTDMixin",
+    "EntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
