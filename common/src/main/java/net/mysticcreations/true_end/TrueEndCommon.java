@@ -62,7 +62,6 @@ public final class TrueEndCommon {
     }
 
     public static void registerEvents() {
-
         TickEvent.SERVER_LEVEL_POST.register(MobStare::onWorldTick);
         TickEvent.PLAYER_POST.register(UnknownSpawning::onPlayerTick);
         TickEvent.PLAYER_POST.register(TimeChange::onPlayerTick);
@@ -78,15 +77,11 @@ public final class TrueEndCommon {
         PlayerEvent.CHANGE_DIMENSION.register(NoCooldown::onPlayerChangedDimension);
         PlayerEvent.CHANGE_DIMENSION.register(PlayerInvManager::onDimensionChange);
         PlayerEvent.CHANGE_DIMENSION.register(PlayCredits::onDimensionChange);
-        PlayerEvent.CHANGE_DIMENSION.register((player, to, from) -> {
-            ConfigSync.sendFogToggle(player);
-        });
+        PlayerEvent.CHANGE_DIMENSION.register((player, to, from) -> ConfigSync.sendFogToggle(player));
         PlayerEvent.PLAYER_RESPAWN.register(NoBtdEscape::onPlayerRespawn);
         PlayerEvent.PLAYER_RESPAWN.register(NoCooldown::onPlayerRespawn);
         PlayerEvent.PLAYER_RESPAWN.register(DimSwapToNWAD::onPlayerRespawn);
-        PlayerEvent.PLAYER_RESPAWN.register((player, bool) -> {
-            ConfigSync.sendFogToggle(player);
-        });
+        PlayerEvent.PLAYER_RESPAWN.register((player, bool) -> ConfigSync.sendFogToggle(player));
         PlayerEvent.PLAYER_ADVANCEMENT.register(DimSwapToBTD::onAdvancement);
         PlayerEvent.PLAYER_JOIN.register(ConfigSync::sendFogToggle);
         EntityEvent.LIVING_DEATH.register(NoBtdEscape::onPlayerDeath);
