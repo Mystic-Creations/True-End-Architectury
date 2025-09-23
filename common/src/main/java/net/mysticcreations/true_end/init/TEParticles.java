@@ -1,7 +1,6 @@
-package net.mysticcreations.true_end.client.init;
+package net.mysticcreations.true_end.init;
 
 import dev.architectury.registry.client.particle.ParticleProviderRegistry;
-import net.mysticcreations.true_end.init.TEParticleTypes;
 import net.mysticcreations.true_end.particle.DreamPortalParticle;
 
 public class TEParticles {

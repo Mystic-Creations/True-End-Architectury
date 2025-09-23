@@ -1,7 +1,7 @@
 package net.mysticcreations.true_end.client.forge;
 
 import net.mysticcreations.true_end.client.TrueEndCommonClient;
-import net.mysticcreations.true_end.client.init.TEParticles;
+import net.mysticcreations.true_end.init.TEParticles;
 import net.mysticcreations.true_end.forge.TrueEndForge;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

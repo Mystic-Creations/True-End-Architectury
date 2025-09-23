@@ -7,7 +7,8 @@
     "minVersion": "0.5.0"
   },
   "client": [
-    "PlayerSleepMixin"
+    "PlayerSleepMixin",
+    "NoStomachGrownSFX"
   ],
   "mixins": [
     "Farlands",

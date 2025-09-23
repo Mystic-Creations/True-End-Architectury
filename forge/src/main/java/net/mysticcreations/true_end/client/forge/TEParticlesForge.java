@@ -1,6 +1,6 @@
 package net.mysticcreations.true_end.client.forge;
 
-import net.mysticcreations.true_end.client.init.TEParticles;
+import net.mysticcreations.true_end.init.TEParticles;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
